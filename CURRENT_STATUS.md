@@ -18,7 +18,7 @@ Inclusa is preparing for collaborative engineering. The [product vision](docs/pr
 - Configured remote: `https://github.com/Medmas07/Inclusa`.
 - The GitHub connector is linked only to `Wiso-1` and returns 404 for this repository. GitHub CLI reports an invalid authentication for `Medmas07`. Git transport can read the remote branch, but Issue API access remains unavailable.
 - Issues, labels, Project configuration, branch protection, and GitHub Actions have **not been verified remotely** through the connector.
-- No temporary `[TEST]` Issue, remote test branch, or test Pull Request was created as part of the bootstrap. See the [workflow test log](docs/planning/workflow-test.md).
+- An attempt to create `[TEST] TEST-001` with the `workflow-test` label returned 404. No test Issue was created or assigned, so no corresponding branch or Pull Request was created. See the [workflow test log](docs/planning/workflow-test.md).
 
 ## Next steps
 

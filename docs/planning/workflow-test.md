@@ -25,5 +25,6 @@ Create at most three temporary Issues prefixed `[TEST]` and labeled `workflow-te
 | 2026-11-12 | Bootstrap local validation | Passed | `python scripts/validate_repo.py`: files, links, YAML, and forms valid |
 | 2026-11-12 | Read-only Git check of remote `main` | Passed | `git ls-remote --heads origin` returned initial commit `84977a4` |
 | 2026-11-12 | GitHub Issue access recheck | Blocked | Connector still returns 404; GitHub CLI authentication is invalid |
+| 2026-11-12 | Create `[TEST] TEST-001` with `workflow-test` label | Blocked | GitHub connector returned 404 from the Issue creation endpoint; no Issue was created or assigned |
 | TBD | GitHub Actions CI | Not run | Must be observed on GitHub |
 | TBD | TEST-001 through TEST-003 | Not run | Repository access required |
