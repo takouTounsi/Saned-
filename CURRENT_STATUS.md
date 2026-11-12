@@ -8,23 +8,23 @@ Inclusa is preparing for collaborative engineering. The [product vision](docs/pr
 
 ## Local repository
 
-- The governance bootstrap was recorded in initial commit `84977a4` on `main`.
+- The governance bootstrap was recorded in initial commit `84977a4` on `main`. Local commits `4fd25a6` and `857fe26` remain ahead of `origin/main`.
 - A read-only Git check confirmed that remote `main` points to initial commit `84977a4` at the time of this update.
 - Documentation, GitHub forms, CI configuration, and local checks are present. `python scripts/validate_repo.py` passed locally for the bootstrap.
-- The English documentation update is recorded in a local follow-up commit. Its remote publication remains to be verified.
+- The English documentation update is recorded locally but has not been pushed to `main`.
 
 ## GitHub verification
 
 - Configured remote: `https://github.com/Medmas07/Inclusa`.
-- The GitHub connector is linked only to `Wiso-1` and returns 404 for this repository. GitHub CLI reports an invalid authentication for `Medmas07`. Git transport can read the remote branch, but Issue API access remains unavailable.
-- Issues, labels, Project configuration, branch protection, and GitHub Actions have **not been verified remotely** through the connector.
-- An attempt to create `[TEST] TEST-001` with the `workflow-test` label returned 404. No test Issue was created or assigned, so no corresponding branch or Pull Request was created. See the [workflow test log](docs/planning/workflow-test.md).
+- The GitHub connector is linked to `Wiso-1` and returns 404 for this repository. GitHub CLI is authenticated as `Medmas07` and can access the private repository.
+- [TEST-001](https://github.com/Medmas07/Inclusa/issues/1) was created with the `workflow-test` label, initially unassigned, then assigned to `Medmas07`. The remote branch `test/1-verify-issue-workflow` was created from the published `main` commit. No Pull Request was created.
+- An existing [Inclusa Project](https://github.com/users/Medmas07/projects/4) was found. Its Status options are Backlog, Ready, Blocked, In progress, In review, and Done; **Validation** is absent. No Project status transition has been tested or changed.
+- GitHub Actions execution and branch protection remain unverified.
 
 ## Next steps
 
-1. Confirm repository access and permissions for the connected GitHub account.
-2. Verify labels and any existing GitHub Project using the [recommended configuration](docs/planning/README.md).
-3. Publish the local English documentation commit when authorized, then observe CI on GitHub.
-4. Perform the authorized workflow tests when the repository is accessible; obtain separate authorization before creating a remote test branch or Pull Request.
+1. Review the existing Project configuration against the [recommended workflow](docs/planning/README.md), including the missing Validation status.
+2. Publish the local documentation commits when authorized, then observe CI on GitHub.
+3. Test Project transitions only with explicit authorization; a Pull Request test also requires separate authorization.
 
 Never add a secret or a real beneficiary document to this repository.

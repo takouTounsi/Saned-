@@ -12,7 +12,7 @@ Create at most three temporary Issues prefixed `[TEST]` and labeled `workflow-te
 
 | ID | Checks | Initial state |
 | --- | --- | --- |
-| TEST-001 | Issue creation, label, manual self-assignment, and status transition if a Project exists | Not run |
+| TEST-001 | Issue creation, label, manual self-assignment, and status transition if a Project exists | Partially passed |
 | TEST-002 | Branch naming, Issue-to-branch traceability, PR template, linking, review, and validation; do not create a remote branch or PR without separate authorization | Not run |
 | TEST-003 | Ready → In Progress → In Review → Validation → Done transitions; Project changes only when authorized | Not run |
 
@@ -26,5 +26,8 @@ Create at most three temporary Issues prefixed `[TEST]` and labeled `workflow-te
 | 2026-11-12 | Read-only Git check of remote `main` | Passed | `git ls-remote --heads origin` returned initial commit `84977a4` |
 | 2026-11-12 | GitHub Issue access recheck | Blocked | Connector still returns 404; GitHub CLI authentication is invalid |
 | 2026-11-12 | Create `[TEST] TEST-001` with `workflow-test` label | Blocked | GitHub connector returned 404 from the Issue creation endpoint; no Issue was created or assigned |
+| 2026-11-12 | Retry TEST-001 with authenticated GitHub CLI | Passed | [Issue #1](https://github.com/Medmas07/Inclusa/issues/1) created unassigned, labeled `workflow-test`, then assigned to `Medmas07` |
+| 2026-11-12 | Create dedicated branch for assigned Issue #1 | Passed | Remote branch `test/1-verify-issue-workflow` created from published `main` (`84977a4`) |
+| 2026-11-12 | Inspect existing Inclusa Project | Partially passed | [Project #4](https://github.com/users/Medmas07/projects/4) exists; Status lacks Validation; item linkage and transitions untested |
 | TBD | GitHub Actions CI | Not run | Must be observed on GitHub |
-| TBD | TEST-001 through TEST-003 | Not run | Repository access required |
+| TBD | TEST-002 and TEST-003 | Not run | PR creation and Project mutations require separate authorization |

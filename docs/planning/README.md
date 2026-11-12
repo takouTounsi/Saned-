@@ -2,7 +2,7 @@
 
 ## Status
 
-The existence and configuration of a GitHub Project linked to this repository are **TBD**: Project access has not been confirmed. This documentation does not create a Project.
+An existing [Inclusa Project](https://github.com/users/Medmas07/projects/4) is accessible to the authenticated `Medmas07` GitHub CLI account. Whether Issue #1 is linked to it is **TBD**. Its current Status options are Backlog, Ready, Blocked, In progress, In review, and Done; **Validation** is missing. No Project fields or items were changed during the workflow test.
 
 ## Recommended configuration if a Project exists
 

@@ -8,6 +8,7 @@ This file records repository changes. **Unreleased** entries describe changes th
 
 - Converted project documentation and GitHub templates to English and clarified the project's professional positioning.
 - Updated the repository status to reflect the current local Git tracking state.
+- Recorded the authenticated TEST-001 Issue, self-assignment, dedicated branch, and existing Project configuration; Project transitions remain untested.
 
 ## Initial governance bootstrap
 
