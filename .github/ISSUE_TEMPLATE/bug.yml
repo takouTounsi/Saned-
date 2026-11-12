@@ -1,35 +1,35 @@
-name: Anomalie
-description: Signaler un comportement observé dans un artefact existant.
+name: Bug report
+description: Report observed behavior in an existing artifact.
 title: "[BUG] "
 labels: ["type:bug"]
 body:
   - type: textarea
     id: context
     attributes:
-      label: Contexte et problème
-      description: Artefact, version, résultat observé et résultat attendu ; sans données personnelles.
+      label: Context and problem
+      description: Artifact, version, observed result, and expected result; no personal data.
     validations:
       required: true
   - type: textarea
     id: reproduction
     attributes:
-      label: Étapes de reproduction
-      description: Utiliser uniquement des exemples synthétiques.
+      label: Reproduction steps
+      description: Use synthetic examples only.
     validations:
       required: true
   - type: textarea
     id: scope
     attributes:
-      label: Périmètre et exclusions
+      label: Scope and exclusions
     validations:
       required: true
   - type: textarea
     id: acceptance
     attributes:
-      label: Critères d'acceptation et validation
+      label: Acceptance criteria and validation
     validations:
       required: true
   - type: textarea
     id: impact
     attributes:
-      label: Dépendances et impacts architecture, sécurité, vie privée
+      label: Dependencies and architecture, security, and privacy impacts

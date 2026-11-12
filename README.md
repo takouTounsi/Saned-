@@ -1,38 +1,38 @@
 # Inclusa
 
-Inclusa est un projet étudiant pour le **Social Tech Challenge 2026 — Tunisie**, défi 2 : « Digitalisation du dépôt des dossiers sociaux ». Il vise à faciliter la compréhension des démarches sociales, la préparation des dossiers et les échanges avec les travailleurs sociaux. Le projet est porté par trois étudiants en génie logiciel, en dialogue avec les parties prenantes institutionnelles (MAS, PNUD et Banque mondiale).
+Inclusa is a professional project for the **Social Tech Challenge 2026 — Tunisia**, Challenge 2: “Digitalizing the submission of social assistance applications.” It aims to make administrative requirements easier to understand, help people prepare complete applications, and support interactions with social workers. The project is being developed in the context of discussions with the Ministry of Social Affairs (MAS), UNDP, and the World Bank.
 
-## Problème et vision
+## Problem and vision
 
-Les démarches administratives peuvent être difficiles à comprendre et les dossiers incomplets retardent leur traitement. La vision exploratoire comprend une assistance en français, arabe et dialecte tunisien, l'accès à des règles officielles, une aide à la préparation des formulaires et documents, et une validation humaine par les travailleurs sociaux. Ces idées **ne sont pas des exigences validées**.
+Social assistance procedures can be difficult to navigate, and incomplete applications can delay processing. The exploratory vision includes assistance in French, Arabic, and Tunisian Arabic; access to official rules; help preparing forms and documents; and human validation by social workers. **These are proposed capabilities, not validated requirements.**
 
-## État du projet
+## Current stage
 
-Ce dépôt est au stade de **préparation de la collaboration**. Aucun produit, composant applicatif ou choix d'architecture n'est considéré comme implémenté ou approuvé. Les exigences validées, les décisions acceptées et les fonctionnalités livrées sont actuellement : **aucune**. Les points inconnus sont notés `TBD`.
+The repository is being prepared for collaborative engineering. No product feature has been implemented, no product requirement has been validated, and no architecture decision has been accepted. Unknowns are marked `TBD`. See [Current Status](CURRENT_STATUS.md) for the latest repository and verification status.
 
 ## Collaboration
 
-L'équipe travaille à partir d'Issues ciblées, choisies et assignées par les contributeurs eux-mêmes. Chaque sujet suit une branche dédiée, une Pull Request liée, une revue humaine et une validation avant clôture. Le travail substantiel ne se fait pas directement sur `main`. Voir [CONTRIBUTING.md](CONTRIBUTING.md) et [AGENTS.md](AGENTS.md).
+Contributors select focused Issues and assign themselves before starting. Each Issue should have a dedicated branch and a linked Pull Request. Human review and validation are required before completion. Substantive work does not happen directly on `main`. See [Contributing](CONTRIBUTING.md) and [Agent Instructions](AGENTS.md).
 
 ## Documentation
 
-| Document | Rôle |
+| Document | Purpose |
 | --- | --- |
-| [Guide documentaire](docs/README.md) | Carte et statut des documents |
-| [État actuel](CURRENT_STATUS.md) | Avancement local et vérifications distantes |
-| [Journal des changements](CHANGELOG.md) | Changements préparés et publiés |
-| [Vision](docs/product/vision.md) | Hypothèses produit à valider |
-| [Questions ouvertes](docs/product/open-questions.md) | Questions produit et institutionnelles |
-| [Architecture](docs/architecture.md) | Contraintes et composants candidats |
-| [Décisions](docs/decisions/README.md) | Processus ADR et décisions acceptées |
-| [Planification](docs/planning/README.md) | Configuration GitHub Project et tests du flux |
+| [Documentation guide](docs/README.md) | Documentation map and status |
+| [Current status](CURRENT_STATUS.md) | Local progress and remote verification |
+| [Changelog](CHANGELOG.md) | Prepared and published changes |
+| [Product vision](docs/product/vision.md) | Product hypotheses awaiting validation |
+| [Open questions](docs/product/open-questions.md) | Product and institutional questions |
+| [Architecture](docs/architecture.md) | Constraints and candidate components |
+| [Architecture decisions](docs/decisions/README.md) | ADR process and accepted decisions |
+| [Planning](docs/planning/README.md) | GitHub Project configuration and workflow tests |
 
-Une proposition d'architecture devient une décision seulement après examen humain et ADR au statut **Accepted**. Une idée de fonctionnalité devient une exigence seulement après validation explicite par les responsables du projet. La documentation distingue systématiquement ces statuts.
+An architecture proposal becomes a decision only after human review and an ADR marked **Accepted**. A proposed capability becomes a requirement only after explicit validation by project decision-makers. Documentation must preserve these distinctions.
 
-## Flux GitHub
+## GitHub workflow
 
-Les [formulaires d'Issue](.github/ISSUE_TEMPLATE/) cadrent la demande. La [trame de Pull Request](.github/PULL_REQUEST_TEMPLATE.md) demande le lien vers l'Issue, le périmètre et les preuves de validation. La CI vérifie les fichiers de gouvernance, la documentation et la configuration YAML ; elle ne construit aucune application. Le [plan de test du flux](docs/planning/workflow-test.md) sépare les contrôles locaux des opérations GitHub restant à effectuer.
+[Issue forms](.github/ISSUE_TEMPLATE/) frame proposed work. The [Pull Request template](.github/PULL_REQUEST_TEMPLATE.md) requests an Issue link, scope, and validation evidence. CI checks governance files, documentation, and YAML; it does not build an application. The [workflow test plan](docs/planning/workflow-test.md) distinguishes local checks from GitHub operations that still need verification.
 
-## Licence
+## License
 
-`TBD` — aucune licence logicielle n'a été choisie ou accordée à ce stade.
+`TBD` — no software license has been selected or granted.

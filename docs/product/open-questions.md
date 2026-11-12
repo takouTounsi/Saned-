@@ -1,24 +1,24 @@
-# Questions ouvertes
+# Open questions
 
-Chaque réponse doit être confirmée par une source ou une décision identifiable avant de devenir une exigence.
+Each answer needs an identifiable source or decision before it becomes a requirement.
 
-## Produit et institution
+## Product and institutional process
 
-- Quels parcours de dépôt sont prioritaires et par quelle autorité seront-ils validés ? `TBD`
-- Quels textes officiels et versions font foi ? Qui assure leur mise à jour ? `TBD`
-- Quels langues, niveaux d'accessibilité et usages hors ligne sont requis ? `TBD`
-- Quelle information d'éligibilité peut être donnée sans se substituer à une décision administrative ? `TBD`
-- Quels acteurs peuvent consulter, corriger et valider chaque dossier ? `TBD`
+- Which application journeys have priority, and who validates them? `TBD`
+- Which official texts and versions are authoritative? Who maintains them? `TBD`
+- Which languages, accessibility levels, and offline uses are required? `TBD`
+- What eligibility information can be given without replacing an administrative decision? `TBD`
+- Which actors may view, correct, and validate each application? `TBD`
 
-## Données et sécurité
+## Data and security
 
-- Quelles catégories de données et pièces sont strictement nécessaires ? `TBD`
-- Quelles règles de conservation, suppression, consentement et audit s'appliquent ? `TBD`
-- Quelles contraintes légales et institutionnelles encadrent l'hébergement et le partage ? `TBD`
-- Quelles données synthétiques seront utilisées pour les tests ? `TBD`
+- Which data categories and documents are strictly necessary? `TBD`
+- What retention, deletion, consent, and audit rules apply? `TBD`
+- What legal and institutional constraints govern hosting and sharing? `TBD`
+- Which synthetic data will be used for tests? `TBD`
 
-## Technique et intégration
+## Technology and integration
 
-- Quels systèmes MAS existent, avec quels contrats d'interopérabilité autorisés ? `TBD`
-- Quelles capacités locales d'hébergement et d'exploitation sont disponibles ? `TBD`
-- Quels critères permettront de choisir ou d'écarter OCR, RAG et modèles légers ? `TBD`
+- Which MAS systems exist, and which interoperability contracts are authorized? `TBD`
+- What local hosting and operations capacity is available? `TBD`
+- What criteria will determine whether OCR, RAG, and small models are suitable? `TBD`

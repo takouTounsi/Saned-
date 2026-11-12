@@ -1,27 +1,29 @@
-# Plan de test du flux GitHub
+# GitHub workflow test plan
 
-Ce document distingue les contrôles locaux des opérations réellement exécutées sur GitHub. Ne pas marquer un test distant réussi sur la seule base d'un fichier YAML local.
+This document distinguishes local checks from operations actually run on GitHub. A local YAML file does not prove that a remote workflow works.
 
-## Contrôle local
+## Local check
 
-Exécuter `python scripts/validate_repo.py`. Vérifier que les fichiers obligatoires, liens locaux, formulaires d'Issue et workflows YAML sont cohérents. La CI doit exécuter la même commande après publication et être observée sur GitHub Actions.
+Run `python scripts/validate_repo.py`. Check required files, local links, Issue forms, and workflow YAML. After publication, observe the same check running in GitHub Actions.
 
-## Tests distants autorisés, si le dépôt est vérifié et accessible
+## Authorized remote tests, if the repository is verified and accessible
 
-Créer au plus trois Issues temporaires avec le préfixe `[TEST]` et le label `workflow-test`, sans données réelles ni ticket produit. Consigner l'URL, les étapes et les résultats. Fermer après validation réussie lorsque cela convient.
+Create at most three temporary Issues prefixed `[TEST]` and labeled `workflow-test`, without real data or product implementation work. Record URLs, steps, and results. Close them after successful validation when appropriate.
 
-| ID | Vérifications | État initial |
+| ID | Checks | Initial state |
 | --- | --- | --- |
-| TEST-001 | Création d'Issue, label, auto-attribution manuelle, transition de statut si Project disponible | Non exécuté |
-| TEST-002 | Convention de branche, lien Issue/branche, trame PR, liaison, revue et validation ; ne pas créer de branche distante ni PR sans nouvelle autorisation | Non exécuté |
-| TEST-003 | Transitions Ready → In Progress → In Review → Validation → Done ; mutations Project seulement si autorisées | Non exécuté |
+| TEST-001 | Issue creation, label, manual self-assignment, and status transition if a Project exists | Not run |
+| TEST-002 | Branch naming, Issue-to-branch traceability, PR template, linking, review, and validation; do not create a remote branch or PR without separate authorization | Not run |
+| TEST-003 | Ready → In Progress → In Review → Validation → Done transitions; Project changes only when authorized | Not run |
 
-## Journal
+## Test log
 
-| Date | Vérification | Résultat | Preuve ou blocage |
+| Date | Check | Result | Evidence or blocker |
 | --- | --- | --- | --- |
-| 2026-11-12 | Accès au dépôt `Medmas07/Inclusa` par le connecteur GitHub | Bloqué | Réponse 404 ; identité connectée `Wiso-1`, accès au dépôt non confirmé |
-| 2026-11-12 | Premier contrôle local | Échec corrigé | Titre H1 manquant dans la trame de Pull Request |
-| 2026-11-12 | Contrôle local final | Réussi | `python scripts/validate_repo.py` : fichiers, liens, YAML et formulaires valides |
-| TBD | CI sur GitHub Actions | Non exécuté | Publication du dépôt requise |
-| TBD | TEST-001 à TEST-003 | Non exécuté | Accès au dépôt requis |
+| 2026-11-12 | Initial GitHub connector access to `Medmas07/Inclusa` | Blocked | 404 response; connected identity `Wiso-1`; repository access unconfirmed |
+| 2026-11-12 | First local validation | Corrected failure | Missing H1 heading in the Pull Request template |
+| 2026-11-12 | Bootstrap local validation | Passed | `python scripts/validate_repo.py`: files, links, YAML, and forms valid |
+| 2026-11-12 | Read-only Git check of remote `main` | Passed | `git ls-remote --heads origin` returned initial commit `84977a4` |
+| 2026-11-12 | GitHub Issue access recheck | Blocked | Connector still returns 404; GitHub CLI authentication is invalid |
+| TBD | GitHub Actions CI | Not run | Must be observed on GitHub |
+| TBD | TEST-001 through TEST-003 | Not run | Repository access required |

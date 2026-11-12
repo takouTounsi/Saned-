@@ -1,29 +1,29 @@
-# ADR-NNN — Titre
+# ADR-NNN — Title
 
-- **Statut :** Proposed | Accepted | Rejected | Superseded
-- **Date :** TBD
-- **Responsables de validation :** TBD
+- **Status:** Proposed | Accepted | Rejected | Superseded
+- **Date:** TBD
+- **Approvers:** TBD
 
-## Contexte
+## Context
 
-Quel problème et quelles contraintes motivent cette décision ?
+What problem and constraints motivate this decision?
 
-## Décision
+## Decision
 
-Quel choix est proposé ou accepté ? Préciser le périmètre.
+What choice is proposed or accepted? Define its scope.
 
-## Alternatives considérées
+## Alternatives considered
 
-Quelles options ont été examinées et pourquoi ?
+Which options were assessed, and why?
 
-## Conséquences
+## Consequences
 
-Quels effets positifs, coûts et limites sont attendus ?
+What benefits, costs, and limitations are expected?
 
-## Risques
+## Risks
 
-Quels risques restent à vérifier, notamment pour la sécurité et la vie privée ?
+What risks remain to assess, especially for security and privacy?
 
-## Suivi
+## Follow-up
 
-Quelles validations, mesures ou actions sont nécessaires ?
+Which validations, measurements, or actions are needed?

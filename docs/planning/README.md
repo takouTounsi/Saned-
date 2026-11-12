@@ -1,28 +1,28 @@
-# Planification et GitHub Project
+# Planning and GitHub Project
 
-## État
+## Status
 
-L'existence et la configuration d'un GitHub Project lié à ce dépôt sont **TBD** : l'accès distant n'a pas été confirmé lors de la préparation locale. Aucun Project n'est créé par cette documentation.
+The existence and configuration of a GitHub Project linked to this repository are **TBD**: Project access has not been confirmed. This documentation does not create a Project.
 
-## Configuration recommandée si un Project existe
+## Recommended configuration if a Project exists
 
-| Champ | Valeurs |
+| Field | Values |
 | --- | --- |
 | Status | Backlog, Ready, In Progress, Blocked, In Review, Validation, Done |
 | Priority | P0, P1, P2, P3 |
 | Type | Feature, Bug, Architecture, Research, Documentation, DevOps, Security, Test |
 | Effort | XS, S, M, L, XL |
 
-N'ajouter ces champs que si leur usage est utile à l'équipe. Les Issues restent normalement non assignées jusqu'au choix d'un contributeur. Un workflow GitHub Actions avec `GITHUB_TOKEN` ne dispose pas automatiquement des droits d'écriture sur GitHub Projects V2 ; une automatisation éventuelle exige un jeton ou une GitHub App avec permissions adaptées, une approbation et une étude de sécurité. `SECRET_INCLUSA` n'a pas de rôle connu et ne doit pas être utilisé par supposition.
+Add fields only when they are useful to the team. Issues normally remain unassigned until a contributor chooses them. `GITHUB_TOKEN` does not automatically grant write access to GitHub Projects V2; any automation requires suitable token or GitHub App permissions, approval, and a security review. The purpose and permissions of `SECRET_INCLUSA` are unknown and must not be assumed.
 
-## Mise en place manuelle
+## Manual setup
 
-1. Vérifier le dépôt et les droits du compte dans GitHub.
-2. Ouvrir l'onglet Projects du dépôt ou du propriétaire et identifier un Project existant lié au dépôt.
-3. Examiner les champs existants ; ajouter seulement les valeurs manquantes utiles, avec l'accord des responsables.
-4. Prévoir un affichage par Status et tester les transitions selon le [plan de test](workflow-test.md).
-5. Si aucun Project n'existe, demander l'autorisation avant d'en créer un.
+1. Verify the repository and account permissions on GitHub.
+2. Inspect the repository or owner Projects tab for an existing linked Project.
+3. Review existing fields; add only useful missing values with decision-maker approval.
+4. Provide a Status view and test transitions using the [workflow test plan](workflow-test.md).
+5. If no Project exists, request authorization before creating one.
 
-## Labels des formulaires
+## Issue form labels
 
-Les formulaires utilisent `type:feature`, `type:bug`, `type:research`, `type:task` et `workflow-test`. Après avoir obtenu l'accès au dépôt, vérifier ou créer ces labels dans **Settings → Labels** avant de tester la création d'Issues. Ne pas attribuer automatiquement les Issues à un membre. Les droits d'administration du dépôt peuvent être nécessaires pour gérer les labels.
+The forms reference `type:feature`, `type:bug`, `type:research`, `type:task`, and `workflow-test`. After gaining repository access, verify or create these labels in **Settings → Labels** before testing Issue creation. Do not auto-assign Issues to a team member. Repository administration rights may be required to manage labels.

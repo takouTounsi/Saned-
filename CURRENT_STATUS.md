@@ -1,30 +1,30 @@
-# État actuel d'Inclusa
+# Current status of Inclusa
 
-**Mis à jour le 12 novembre 2026.** Ce document décrit l'état constaté de la copie de travail et des vérifications GitHub ; il ne remplace pas les décisions ni les Issues.
+**Updated November 12, 2026.** This document describes observed repository and GitHub verification status. It does not replace decisions or Issues.
 
-## Projet
+## Project
 
-Inclusa est en phase de préparation de la collaboration. La [vision produit](docs/product/vision.md) et les [composants candidats](docs/architecture.md) restent à valider. Exigences produit validées : **aucune**. Décisions d'architecture acceptées : **aucune**. Fonctionnalités implémentées : **aucune**.
+Inclusa is preparing for collaborative engineering. The [product vision](docs/product/vision.md) and [candidate components](docs/architecture.md) still require validation. Validated product requirements: **none**. Accepted architecture decisions: **none**. Implemented product features: **none**.
 
-## Dépôt local
+## Local repository
 
-- Le dépôt était vide au début du bootstrap : aucun commit ni fichier de projet préexistant.
-- Les documents de gouvernance, formulaires GitHub, workflow CI et contrôles locaux sont préparés dans la copie de travail.
-- Le contrôle `python scripts/validate_repo.py` réussit localement.
-- Le bootstrap est enregistré dans un commit local initial sur `main` ; aucun push n'a été effectué.
+- The governance bootstrap was recorded in initial commit `84977a4` on `main`.
+- A read-only Git check confirmed that remote `main` points to initial commit `84977a4` at the time of this update.
+- Documentation, GitHub forms, CI configuration, and local checks are present. `python scripts/validate_repo.py` passed locally for the bootstrap.
+- The English documentation update is recorded in a local follow-up commit. Its remote publication remains to be verified.
 
-## GitHub distant
+## GitHub verification
 
-- Remote configuré : `https://github.com/Medmas07/Inclusa`.
-- Le connecteur GitHub lié à `Wiso-1` a reçu une réponse 404 pour ce dépôt ; son existence et les permissions de ce compte sont **TBD**.
-- Issues, labels, Project, protection de branche et GitHub Actions : **non vérifiés à distance**.
-- Aucun ticket temporaire `[TEST]`, branche distante ni Pull Request n'a été créé. Le détail des tests est dans le [journal du flux](docs/planning/workflow-test.md).
+- Configured remote: `https://github.com/Medmas07/Inclusa`.
+- The GitHub connector is linked only to `Wiso-1` and returns 404 for this repository. GitHub CLI reports an invalid authentication for `Medmas07`. Git transport can read the remote branch, but Issue API access remains unavailable.
+- Issues, labels, Project configuration, branch protection, and GitHub Actions have **not been verified remotely** through the connector.
+- No temporary `[TEST]` Issue, remote test branch, or test Pull Request was created as part of the bootstrap. See the [workflow test log](docs/planning/workflow-test.md).
 
-## Prochaines étapes
+## Next steps
 
-1. Confirmer le dépôt cible et donner accès au compte connecté si nécessaire.
-2. Vérifier les labels et l'éventuel GitHub Project ; suivre la [configuration proposée](docs/planning/README.md).
-3. Avec autorisation, pousser le commit local, puis observer l'exécution réelle de la CI.
-4. Effectuer les tests du flux autorisés lorsque le dépôt est accessible ; demander une nouvelle autorisation avant toute branche distante ou Pull Request de test.
+1. Confirm repository access and permissions for the connected GitHub account.
+2. Verify labels and any existing GitHub Project using the [recommended configuration](docs/planning/README.md).
+3. Publish the local English documentation commit when authorized, then observe CI on GitHub.
+4. Perform the authorized workflow tests when the repository is accessible; obtain separate authorization before creating a remote test branch or Pull Request.
 
-Aucun secret ni document de bénéficiaire ne doit être ajouté au dépôt.
+Never add a secret or a real beneficiary document to this repository.

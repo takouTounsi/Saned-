@@ -1,21 +1,21 @@
-# Vision produit — proposition à valider
+# Product vision — proposal awaiting validation
 
-## Contexte
+## Context
 
-Inclusa répond au défi 2 du Social Tech Challenge 2026 en Tunisie : « Digitalisation du dépôt des dossiers sociaux ». L'objectif exploratoire est de rendre les démarches plus compréhensibles et la préparation des dossiers plus fiable, tout en conservant le rôle décisionnel des travailleurs sociaux.
+Inclusa addresses Challenge 2 of the Social Tech Challenge 2026 in Tunisia: “Digitalizing the submission of social assistance applications.” Its exploratory goal is to make administrative processes easier to understand and applications more complete while preserving the decision-making role of social workers.
 
-## Utilisateurs envisagés
+## Potential users
 
-- Bénéficiaires et personnes les accompagnant.
-- Travailleurs sociaux chargés de l'examen et de la validation.
-- Administrateurs institutionnels et responsables de l'intégration : responsabilités exactes `TBD`.
+- Beneficiaries and people assisting them.
+- Social workers responsible for review and validation.
+- Institutional administrators and integration owners; exact responsibilities are `TBD`.
 
-## Pistes fonctionnelles
+## Potential capabilities
 
-Assistance conversationnelle en français, arabe et dialecte tunisien ; recherche de règles officielles ; indication préliminaire d'éligibilité ; aide à remplir les formulaires ; dépôt de documents, OCR et extraction ; vérification de complétude et cohérence ; préparation et suivi des dossiers ; interface de travail social. À plus long terme, voix, langue des signes et intégration aux systèmes MAS sont des possibilités.
+Conversational assistance in French, Arabic, and Tunisian Arabic; retrieval of official rules; preliminary eligibility guidance; guided form completion; document upload, OCR, and extraction; completeness and consistency checks; application preparation and tracking; and a social worker interface. Voice, sign-language interaction, and integration with MAS systems are possible longer-term directions.
 
-**Toutes ces pistes sont des concepts préliminaires.** Elles ne constituent ni un engagement de livraison, ni des exigences validées, ni des tickets prêts à développer. Les sources réglementaires, les parcours prioritaires, les critères d'éligibilité et les règles d'accès sont `TBD`.
+**All of these are preliminary concepts.** They are neither delivery commitments nor validated requirements nor implementation tickets. Authoritative regulatory sources, priority journeys, eligibility rules, and access rules are `TBD`.
 
-## Principes institutionnels
+## Institutional principles
 
-Le projet doit étudier des solutions d'IA légères et ciblées, ouvertes, hébergeables localement ou sur site, interopérables, accessibles et respectueuses de la confidentialité. Toute recommandation automatisée reste soumise à une validation humaine selon le processus institutionnel à préciser.
+The project should assess small, targeted AI; open-source solutions; local or on-premise hosting; interoperability; accessibility; and privacy. Automated guidance must remain subject to human validation under an institutional process that is still `TBD`.

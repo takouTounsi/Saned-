@@ -1,23 +1,29 @@
-# Journal des changements
+# Changelog
 
-Ce fichier retrace les changements préparés dans le dépôt. Les éléments sous **Non publié** sont présents dans la copie de travail locale ; ils ne représentent pas une version publiée sur GitHub.
+This file records repository changes. **Unreleased** entries describe changes that have not been published as a release.
 
-## Non publié
+## Unreleased
 
-### Ajouté
+### Changed
 
-- Gouvernance du dépôt : README, instructions pour agents, guide de contribution, `.gitignore` et `.editorconfig`.
-- Documentation exploratoire : vision produit, questions ouvertes, architecture et trame de décision ADR.
-- Formulaires d'Issue, trame de Pull Request et configuration GitHub Actions pour contrôler les documents et le YAML.
-- Plan et journal de test du flux GitHub, ainsi que le validateur local `scripts/validate_repo.py`.
-- Présent journal et état courant du projet.
+- Converted project documentation and GitHub templates to English and clarified the project's professional positioning.
+- Updated the repository status to reflect the current local Git tracking state.
 
-### Vérifié localement
+## Initial governance bootstrap
 
-- `python scripts/validate_repo.py` : réussi le 12 novembre 2026.
+### Added
 
-### À vérifier après publication
+- Repository governance: README, agent instructions, contribution guide, `.gitignore`, and `.editorconfig`.
+- Exploratory product vision, open questions, architecture guidance, and ADR template.
+- Issue forms, Pull Request template, GitHub Actions configuration for documentation validation, and `scripts/validate_repo.py`.
+- GitHub workflow test plan, changelog, and current status document.
 
-- Exécution de GitHub Actions, fonctionnement des formulaires et des labels, accès au GitHub Project et tests du flux collaboratif.
+### Validated locally
 
-Aucune fonctionnalité applicative n'a été développée.
+- `python scripts/validate_repo.py` passed on November 12, 2026.
+
+### Pending remote verification
+
+- GitHub Actions execution, Issue forms and labels, GitHub Project access, and collaboration workflow tests.
+
+No application feature was developed.

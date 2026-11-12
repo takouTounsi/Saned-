@@ -1,34 +1,34 @@
-# Architecture — état exploratoire
+# Architecture — exploratory state
 
-## Contexte et acteurs
+## Context and actors
 
-Inclusa vise à aider les bénéficiaires à préparer des dossiers sociaux et les travailleurs sociaux à les examiner. Les interactions avec le MAS, le PNUD et la Banque mondiale sont à préciser (`TBD`). Aucune frontière système n'a encore été acceptée.
+Inclusa aims to help beneficiaries prepare social assistance applications and social workers review them. The roles of MAS, UNDP, and the World Bank in the system are `TBD`. No system boundary has been accepted.
 
-## Vue d'ensemble envisagée
+## Potential high-level flow
 
-Un parcours pourrait relier une personne bénéficiaire, une assistance à la préparation, puis une validation humaine par un travailleur social. Les échanges avec des référentiels officiels ou systèmes MAS supposent des accords, sources et interfaces encore `TBD`. Il ne s'agit pas d'un dessin de déploiement.
+A future journey could connect a beneficiary, preparation assistance, and human validation by a social worker. Any exchange with official references or MAS systems depends on agreements, sources, and interfaces that remain `TBD`. This is not a deployment design.
 
-## Composants candidats
+## Candidate components
 
-Assistant conversationnel ; moteur de connaissance et de règles ; intelligence documentaire ; gestion des dossiers ; authentification ; stockage des documents ; interface des travailleurs sociaux. Ces noms sont des **candidats fonctionnels**, pas des services, dépôts, API ou équipes déjà décidés. OCR, RAG et aide à l'éligibilité restent des options à évaluer.
+Conversational assistant; knowledge and rules engine; document intelligence; case management; authentication; document storage; and social worker interface. These are **functional candidates**, not approved services, repositories, APIs, or team boundaries. OCR, RAG, and eligibility assistance remain options to assess.
 
-## Contraintes non fonctionnelles
+## Non-functional constraints
 
-- **IA ciblée :** évaluer des solutions légères, explicables et adaptées à la tâche.
-- **Ouverture et hébergement :** privilégier les solutions ouvertes et examiner un hébergement local ou sur site ; choix précis `TBD`.
-- **Interopérabilité :** identifier les systèmes existants et les règles d'échange avant toute intégration.
-- **Accessibilité :** tester les parcours avec les publics concernés ; niveau et normes applicables `TBD`.
-- **Sécurité et confidentialité :** minimisation des données, contrôle d'accès par rôle, traçabilité et séparation des environnements à définir.
-- **Décision humaine :** les résultats automatisés ne remplacent pas l'instruction et la validation institutionnelles.
+- **Targeted AI:** assess lightweight, explainable approaches suited to each task.
+- **Openness and hosting:** favor open solutions and assess local or on-premise hosting; specific choices are `TBD`.
+- **Interoperability:** identify existing systems and exchange rules before integration.
+- **Accessibility:** test journeys with relevant users; applicable standards and levels are `TBD`.
+- **Security and privacy:** define data minimization, role-based access, auditability, and environment separation.
+- **Human decisions:** automated results do not replace institutional review or validation.
 
-## Vie privée et documents
+## Privacy and documents
 
-Les dossiers peuvent contenir des données personnelles et pièces sensibles. Les documents réels et données de bénéficiaires ne doivent pas entrer dans le dépôt ou les tests. Les règles de conservation, chiffrement, journalisation, suppression et accès doivent être établies avec les responsables compétents avant toute implémentation (`TBD`).
+Applications may contain personal data and sensitive documents. Real beneficiary data and documents must not enter the repository or tests. Retention, encryption, logging, deletion, and access rules must be agreed with responsible stakeholders before implementation (`TBD`).
 
-## Déploiement et intégration
+## Deployment and integration
 
-Le mode d'hébergement, les environnements, l'identité, les systèmes MAS et les contrats d'échange sont `TBD`. Aucun service cloud, schéma de données ou contrat API n'est retenu.
+Hosting mode, environments, identity management, MAS systems, and exchange contracts are `TBD`. No cloud service, data schema, or API contract has been selected.
 
-## Questions d'architecture
+## Architecture questions
 
-Voir [questions ouvertes](product/open-questions.md). Tout choix structurant doit être proposé dans un [ADR](decisions/README.md), examiné puis marqué **Accepted** par les responsables avant d'être traité comme décision.
+See the [open questions](product/open-questions.md). Every structural choice should be proposed in an [ADR](decisions/README.md), reviewed, and marked **Accepted** by decision-makers before it is treated as a decision.
