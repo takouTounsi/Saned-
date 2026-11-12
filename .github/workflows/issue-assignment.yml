@@ -121,13 +121,13 @@ jobs:
         if: ${{ always() }}
         shell: bash
         env:
-          GH_TOKEN: ${{ secrets.INCLUSA_PROJECT_TOKEN }}
+          GH_TOKEN: ${{ secrets.SECRET_INCLUSA }}
         run: |
           set -euo pipefail
           if [[ -z "$GH_TOKEN" ]]; then
-            echo '::warning::INCLUSA_PROJECT_TOKEN is not configured; Project status was not changed.'
-            echo 'Project status: not changed (missing INCLUSA_PROJECT_TOKEN).' >> "$GITHUB_STEP_SUMMARY"
-            exit 0
+            echo '::error::SECRET_INCLUSA is not configured; Project status was not changed.'
+            echo 'Project status: not changed (missing SECRET_INCLUSA).' >> "$GITHUB_STEP_SUMMARY"
+            exit 1
           fi
 
           project_data="$(gh api graphql \

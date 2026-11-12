@@ -33,7 +33,7 @@ An architecture proposal becomes a decision only after human review and an ADR m
 
 [Issue forms](.github/ISSUE_TEMPLATE/) frame proposed work. The [Pull Request template](.github/PULL_REQUEST_TEMPLATE.md) requests an Issue link, scope, and validation evidence. CI checks governance files, documentation, and YAML; it does not build an application. The [workflow test plan](docs/planning/workflow-test.md) distinguishes local checks from GitHub operations that still need verification.
 
-A proposed [self-assignment workflow](.github/workflows/issue-assignment.yml) creates a linked branch when a contributor assigns an open Issue to themselves. Updating the GitHub Project's `In progress` status also requires a dedicated Project token; see [planning](docs/planning/README.md). The workflow only starts after it is published on the default branch, and earlier assignments do not trigger it retroactively.
+The [self-assignment workflow](.github/workflows/issue-assignment.yml) creates a linked branch when a contributor assigns an open Issue to themselves. Updating the GitHub Project's `In progress` status uses the `SECRET_INCLUSA` repository secret; see [planning](docs/planning/README.md). The workflow only starts after it is published on the default branch, and earlier assignments do not trigger it retroactively.
 
 ## License
 

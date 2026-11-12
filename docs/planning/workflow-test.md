@@ -35,5 +35,7 @@ Create at most three temporary Issues prefixed `[TEST]` and labeled `workflow-te
 | 2026-11-12 | Attempt to add TEST-002 to Inclusa Project with CLI | Blocked | CLI token has `read:project` but lacks required `project` scope; the Issue was already present through another path |
 | 2026-11-12 | Prepare self-assignment workflow locally | Prepared | Linked branch and `In progress` update configured; requires publication and dedicated Project token before remote validation |
 | 2026-11-12 | Check prerequisites before publication | Partial | Issue #2 is unassigned again; `INCLUSA_PROJECT_TOKEN` is not configured |
+| 2026-11-12 | Self-assign TEST-003 (Issue #4) after workflow merge | Partial | Run succeeded; linked branch created; Project status unchanged because no Project token secret existed |
+| 2026-11-12 | Switch Project step to `SECRET_INCLUSA` | Prepared | Owner authorized its use; missing secret now fails the run instead of warning |
 | TBD | GitHub Actions CI | Not run | Must be observed on GitHub |
 | TBD | TEST-002 merge and TEST-003 | Not run | Manual PR test and Project access still pending |
