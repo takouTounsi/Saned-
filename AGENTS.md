@@ -35,7 +35,7 @@ A product vision or **Proposed** ADR is neither an approved requirement nor an a
 
 - Never add beneficiary data, real administrative documents, credentials, or secrets to the repository. Use synthetic examples only.
 - Minimize data; plan for role-based access, auditability, and human validation in future authorized work.
-- Never read, print, copy, or use the value of `SECRET_INCLUSA`. Do not assume its purpose or permissions. Prefer `GITHUB_TOKEN` with least-privilege permissions where appropriate.
+- `SECRET_INCLUSA` is the repository Actions secret designated by the project owner for GitHub Projects automation (for example, setting an Issue's Project status). Workflows may reference it only as `secrets.SECRET_INCLUSA`, in the steps that need Project access. Never read, print, log, copy, or commit its value. Use `GITHUB_TOKEN` with least-privilege permissions for everything else.
 - Do not configure production, deployment, or external access without authorization.
 
 ## Definition of Done

@@ -17,18 +17,15 @@ Inclusa is preparing for collaborative engineering. The [product vision](docs/pr
 
 - Configured remote: `https://github.com/Medmas07/Inclusa`.
 - The GitHub connector is linked to `Wiso-1` and returns 404 for this repository. GitHub CLI is authenticated as `Medmas07` and can access the private repository.
-- [TEST-001](https://github.com/Medmas07/Inclusa/issues/1) was created with the `workflow-test` label, initially unassigned, then assigned to `Medmas07`. The remote branch `test/1-verify-issue-workflow` was created from the published `main` commit. No Pull Request was created.
-- [TEST-002](https://github.com/Medmas07/Inclusa/issues/2) was self-assigned to `Medmas07` before any assignment workflow existed, so no branch or status change occurred. It is currently unassigned again, in the Inclusa Project with Status `Backlog`, and has no remote branch.
-- The repository Actions secret `INCLUSA_PROJECT_TOKEN` is not configured yet; only `SECRET_INCLUSA` exists, and it must not be reused.
-- An existing [Inclusa Project](https://github.com/users/Medmas07/projects/4) was found. Its Status options are Backlog, Ready, Blocked, In progress, In review, and Done; **Validation** is absent. No Project status transition has been tested or changed.
-- GitHub Actions execution and branch protection remain unverified.
-- A self-assignment workflow is prepared locally on `devops/2-automate-issue-assignment`. It requires publication on `main` before assignments can trigger it. Its Project update also requires a dedicated token with Projects V2 write access.
+- Old test Issues #1 and #2 and their branches were deleted at the owner's request. [TEST-003 (Issue #4)](https://github.com/Medmas07/Inclusa/issues/4) is the active workflow test; it is unassigned and in the Inclusa Project.
+- An existing [Inclusa Project](https://github.com/users/Medmas07/projects/4) was found. Its Status options are Backlog, Ready, Blocked, In progress, In review, and Done; **Validation** is absent.
+- GitHub Actions CI runs on Pull Requests. Branch protection remains unverified.
+- The [self-assignment workflow](.github/workflows/issue-assignment.yml) is on `main`. Its first run on Issue #4 created the linked branch, but did not change the Project status because no Project token was configured. The Project step now uses `SECRET_INCLUSA`.
 
 ## Next steps
 
-1. Review the existing Project configuration against the [recommended workflow](docs/planning/README.md), including the missing Validation status.
-2. Publish the local documentation commits when authorized, then observe CI on GitHub.
-3. Configure the dedicated Project token, publish the assignment workflow through review, then reassign TEST-002 to test the linked branch and `In progress` transition.
-4. Verify that the Project's built-in **Item closed → Done** automation is enabled before the manual PR merge test.
+1. Self-assign Issue #4 and confirm the run creates the linked branch and sets Status `In progress`.
+2. Review the existing Project configuration against the [recommended workflow](docs/planning/README.md), including the missing Validation status.
+3. Verify that the Project's built-in **Item closed → Done** automation is enabled before a PR merge test.
 
 Never add a secret or a real beneficiary document to this repository.
