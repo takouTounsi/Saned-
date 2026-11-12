@@ -1,0 +1,25 @@
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.db
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Python validation cache
+__pycache__/
+*.pyc
+.venv/
+
+# Test output
+.pytest_cache/
+.coverage

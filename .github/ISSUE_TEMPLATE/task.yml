@@ -1,0 +1,37 @@
+name: Tâche de gouvernance ou architecture
+description: Tâche ciblée de documentation, DevOps ou proposition d'architecture.
+title: "[TASK] "
+labels: ["type:task"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexte et problème
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objectif et livrable
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Périmètre et exclusions
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dépendances
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critères d'acceptation et validation
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact architecture, sécurité et vie privée

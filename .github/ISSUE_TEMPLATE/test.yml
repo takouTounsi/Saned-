@@ -1,0 +1,30 @@
+name: Test du flux GitHub
+description: Test temporaire de collaboration uniquement.
+title: "[TEST] "
+labels: ["workflow-test"]
+body:
+  - type: markdown
+    attributes:
+      value: "Ticket temporaire ; aucune implémentation produit. Consigner les résultats puis fermer après validation."
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexte et objectif du test
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Étapes, périmètre et exclusions
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critères de réussite et preuves
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Journal des résultats et blocages
