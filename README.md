@@ -36,5 +36,4 @@ An architecture proposal becomes a decision only after human review and an ADR m
 The [self-assignment workflow](.github/workflows/issue-assignment.yml) creates a linked branch when a contributor assigns an open Issue to themselves. Updating the GitHub Project's `In progress` status uses the `SECRET_INCLUSA` repository secret; see [planning](docs/planning/README.md). The workflow only starts after it is published on the default branch, and earlier assignments do not trigger it retroactively.
 
 ## License
-
 `TBD` — no software license has been selected or granted.
