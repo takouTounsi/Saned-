@@ -1,37 +1,37 @@
-name: Recherche
-description: Étudier une question sans présumer de la décision.
+name: Research
+description: Investigate a question without assuming the outcome.
 title: "[RESEARCH] "
 labels: ["type:research"]
 body:
   - type: textarea
     id: context
     attributes:
-      label: Contexte et question
+      label: Context and research question
     validations:
       required: true
   - type: textarea
     id: objective
     attributes:
-      label: Objectif et livrable
+      label: Objective and deliverable
     validations:
       required: true
   - type: textarea
     id: scope
     attributes:
-      label: Périmètre et exclusions
+      label: Scope and exclusions
     validations:
       required: true
   - type: textarea
     id: sources
     attributes:
-      label: Sources, dépendances et alternatives
+      label: Sources, dependencies, and alternatives
   - type: textarea
     id: acceptance
     attributes:
-      label: Critères d'acceptation et méthode de validation
+      label: Acceptance criteria and validation method
     validations:
       required: true
   - type: textarea
     id: impact
     attributes:
-      label: Impact architecture, sécurité et vie privée
+      label: Architecture, security, and privacy impact

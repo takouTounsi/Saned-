@@ -1,44 +1,44 @@
-name: Fonctionnalité proposée
-description: Proposition à valider ; ne constitue pas une exigence approuvée.
+name: Proposed feature
+description: Proposal for validation, not an approved requirement.
 title: "[PROPOSAL] "
 labels: ["type:feature"]
 body:
   - type: markdown
     attributes:
-      value: "Ne pas créer de ticket d'implémentation produit sans autorisation explicite."
+      value: "Do not create a product implementation ticket without explicit authorization."
   - type: textarea
     id: context
     attributes:
-      label: Contexte et problème
-      description: Pourquoi cette proposition existe-t-elle ?
+      label: Context and problem
+      description: Why does this proposal exist?
     validations:
       required: true
   - type: textarea
     id: objective
     attributes:
-      label: Objectif et source de validation
-      description: Résultat attendu et personne ou source qui peut le valider.
+      label: Objective and validation source
+      description: Expected outcome and who or what can validate it.
     validations:
       required: true
   - type: textarea
     id: scope
     attributes:
-      label: Périmètre et exclusions
+      label: Scope and exclusions
     validations:
       required: true
   - type: textarea
     id: dependencies
     attributes:
-      label: Dépendances et questions ouvertes
+      label: Dependencies and open questions
   - type: textarea
     id: acceptance
     attributes:
-      label: Critères d'acceptation et validation
-      description: Critères mesurables et méthode de vérification.
+      label: Acceptance criteria and validation
+      description: Measurable criteria and verification method.
     validations:
       required: true
   - type: textarea
     id: impact
     attributes:
-      label: Impact architecture, sécurité et vie privée
-      description: Indiquer TBD si inconnu.
+      label: Architecture, security, and privacy impact
+      description: Write TBD if unknown.

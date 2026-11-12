@@ -1,43 +1,43 @@
-# Instructions pour les agents — Inclusa
+# Agent instructions — Inclusa
 
-Lire ce fichier avant toute tâche future. Ce dépôt concerne actuellement la gouvernance et la documentation du projet Inclusa, candidat au Social Tech Challenge 2026 en Tunisie (défi 2). Trois étudiants en génie logiciel y collaborent. Le produit et son architecture restent à valider.
+Read this file before future work. Inclusa is a professional project for the Social Tech Challenge 2026 in Tunisia (Challenge 2). The product and its architecture still require validation. This repository currently contains governance and project documentation.
 
-## Sources de vérité
+## Sources of truth
 
-1. Instruction explicite des responsables du projet et Issue autorisée.
-2. ADR au statut **Accepted**, dans `docs/decisions/`.
-3. Documentation de projet et critères d'acceptation de l'Issue.
+1. Explicit instructions from project decision-makers and an authorized Issue.
+2. ADRs marked **Accepted** in `docs/decisions/`.
+3. Project documentation and the Issue's acceptance criteria.
 
-Une vision ou un ADR **Proposed** ne vaut ni exigence ni décision approuvée. Marquer les inconnues `TBD`. Ne jamais inventer d'exigences produit ni élargir silencieusement le périmètre.
+A product vision or **Proposed** ADR is neither an approved requirement nor an accepted decision. Mark unknowns `TBD`. Never invent product requirements or silently expand scope.
 
-## Contraintes et responsabilités
+## Constraints and responsibilities
 
-- Préserver les principes institutionnels : IA ciblée et légère, logiciels ouverts, hébergement local ou sur site à étudier, interopérabilité, décision humaine, confidentialité, sécurité et accessibilité.
-- Traiter tout composant décrit dans `docs/architecture.md` comme candidat. Ne pas inventer d'API, de schéma, de service ou de choix d'infrastructure.
-- Maintenir les documents, formulaires, workflows et contrôles cohérents. Ne pas ajouter de dépendance sans justification documentée.
-- Ne jamais créer de tickets d'implémentation en production sans autorisation explicite ; ne jamais implémenter de fonctionnalité produit sans Issue autorisée.
+- Preserve the institutional principles: small, targeted AI; open-source solutions; local or on-premise hosting to assess; interoperability; human decision-making; confidentiality; security; and accessibility.
+- Treat components in `docs/architecture.md` as candidates. Do not invent APIs, schemas, services, or infrastructure choices.
+- Keep documentation, forms, workflows, and checks consistent. Do not introduce dependencies without a documented justification.
+- Never create production implementation tickets without explicit authorization. Never implement product features without an authorized Issue.
 
-## Flux de travail
+## Workflow
 
-- Commencer par une Issue ciblée, normalement non assignée ; le contributeur se l'assigne avant de travailler.
-- Créer une branche dédiée selon `type/numero-description` ; ne jamais développer de travail substantiel directement sur `main`.
-- Relier la Pull Request à l'Issue ; décrire périmètre, validation, documentation et impacts de sécurité/confidentialité.
-- Faire examiner par un humain. Ne jamais fusionner une Pull Request de manière autonome.
-- Ne pas committer ni pousser sans l'autorisation requise dans la tâche courante.
+- Start with a focused Issue, normally unassigned. A contributor self-assigns before starting.
+- Use a dedicated branch named `type/number-description`. Never perform substantive development directly on `main`.
+- Link the Pull Request to its Issue. Describe scope, validation, documentation, and security and privacy impacts.
+- Obtain human review. Never merge a Pull Request autonomously.
+- Do not commit or push without authorization in the current task.
 
-## Tests et documentation
+## Tests and documentation
 
-- Exécuter les contrôles pertinents et fournir des résultats vérifiables. Ne jamais affaiblir des tests pour faire passer la CI.
-- Mettre à jour la documentation liée à tout changement approuvé. Rédiger les documents destinés au projet en français ; la configuration technique peut être en anglais.
-- Ne jamais déclarer « Done » sur la seule base d'une compilation ou d'une Pull Request sans revue.
+- Run relevant checks and provide verifiable results. Never weaken tests to make CI pass.
+- Update documentation affected by approved changes. Write project documentation in English; technical configuration may also use English.
+- Do not mark work **Done** merely because it compiles or has an unreviewed Pull Request.
 
-## Sécurité et vie privée
+## Security and privacy
 
-- Ne jamais publier de données de bénéficiaires, pièces administratives réelles, identifiants ou secrets. Utiliser uniquement des exemples synthétiques.
-- Réduire les données au minimum nécessaire ; prévoir accès par rôle, traçabilité et validation humaine dans les travaux futurs.
-- Ne jamais lire, afficher, copier ou exploiter la valeur de `SECRET_INCLUSA`. Ne pas supposer son objet ou ses droits. Préférer `GITHUB_TOKEN` avec permissions minimales lorsque nécessaire.
-- Ne pas configurer de production, déploiement ou accès externe sans autorisation.
+- Never add beneficiary data, real administrative documents, credentials, or secrets to the repository. Use synthetic examples only.
+- Minimize data; plan for role-based access, auditability, and human validation in future authorized work.
+- Never read, print, copy, or use the value of `SECRET_INCLUSA`. Do not assume its purpose or permissions. Prefer `GITHUB_TOKEN` with least-privilege permissions where appropriate.
+- Do not configure production, deployment, or external access without authorization.
 
-## Définition de Done
+## Definition of Done
 
-Une tâche est Done seulement si son objectif et ses critères d'acceptation sont atteints, son périmètre respecté, les tests requis réussis, la documentation mise à jour, les impacts sécurité et vie privée traités, les revues requises achevées, la validation effectuée et les changements fusionnés selon le flux approuvé.
+A task is Done only when its objective and acceptance criteria are met, scope is respected, required tests pass, relevant documentation is updated, security and privacy impacts are addressed, required reviews are complete, validation is performed, and changes are merged through the approved workflow.

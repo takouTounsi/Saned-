@@ -1,0 +1,188 @@
+name: Start work on self-assignment
+
+on:
+  issues:
+    types: [assigned]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: issue-assignment-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  start-work:
+    if: >-
+      github.event.issue.state == 'open' &&
+      github.actor == github.event.assignee.login
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPOSITORY: ${{ github.repository }}
+      OWNER: ${{ github.repository_owner }}
+      REPO_NAME: ${{ github.event.repository.name }}
+      ISSUE_NUMBER: ${{ github.event.issue.number }}
+      ISSUE_TITLE: ${{ github.event.issue.title }}
+    steps:
+      - name: Create linked branch if needed
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          issue_data="$(gh api graphql \
+            -f query='query($owner: String!, $name: String!, $number: Int!) {
+              repository(owner: $owner, name: $name) {
+                id
+                defaultBranchRef { name target { ... on Commit { oid } } }
+                issue(number: $number) {
+                  id
+                  linkedBranches(first: 20) { totalCount }
+                }
+              }
+            }' \
+            -f owner="$OWNER" -f name="$REPO_NAME" -F number="$ISSUE_NUMBER")"
+
+          repository_id="$(jq -r '.data.repository.id // empty' <<< "$issue_data")"
+          issue_id="$(jq -r '.data.repository.issue.id // empty' <<< "$issue_data")"
+          base_oid="$(jq -r '.data.repository.defaultBranchRef.target.oid // empty' <<< "$issue_data")"
+          base_name="$(jq -r '.data.repository.defaultBranchRef.name // empty' <<< "$issue_data")"
+          linked_count="$(jq -r '.data.repository.issue.linkedBranches.totalCount // 0' <<< "$issue_data")"
+          if [[ -z "$repository_id" || -z "$issue_id" || -z "$base_oid" ]]; then
+            echo '::error::Could not read the Issue or default branch.'
+            exit 1
+          fi
+          if (( linked_count > 0 )); then
+            echo "Issue #$ISSUE_NUMBER already has a linked branch."
+            exit 0
+          fi
+
+          prefix="issue"
+          if jq -e '.issue.labels[] | select(.name == "workflow-test")' "$GITHUB_EVENT_PATH" >/dev/null; then
+            prefix="test"
+          else
+            mapfile -t types < <(jq -r '.issue.labels[].name | select(startswith("type:"))' "$GITHUB_EVENT_PATH")
+            if (( ${#types[@]} == 1 )); then
+              case "${types[0]}" in
+                type:bug) prefix="fix" ;;
+                type:feature) prefix="feat" ;;
+                type:research) prefix="research" ;;
+                type:docs) prefix="docs" ;;
+                type:devops) prefix="devops" ;;
+                type:architecture) prefix="architecture" ;;
+              esac
+            fi
+          fi
+
+          slug="$(python3 - <<'PY'
+          import os
+          import re
+          import unicodedata
+
+          title = os.environ['ISSUE_TITLE']
+          title = re.sub(r'^\[[^]]+\]\s*', '', title)
+          title = re.sub(r'^TEST-\d+\s*[—–:\-]*\s*', '', title, flags=re.I)
+          title = unicodedata.normalize('NFKD', title).encode('ascii', 'ignore').decode().lower()
+          slug = re.sub(r'[^a-z0-9]+', '-', title).strip('-')[:48].rstrip('-')
+          print(slug or 'work')
+          PY
+          )"
+          branch="$prefix/$ISSUE_NUMBER-$slug"
+
+          existing="$(gh api graphql \
+            -f query='query($owner: String!, $name: String!, $ref: String!) {
+              repository(owner: $owner, name: $name) { ref(qualifiedName: $ref) { name } }
+            }' \
+            -f owner="$OWNER" -f name="$REPO_NAME" -f ref="refs/heads/$branch" \
+            --jq '.data.repository.ref.name // empty')"
+          if [[ -n "$existing" ]]; then
+            echo "::warning::Branch $branch already exists but is not linked to Issue #$ISSUE_NUMBER."
+            exit 0
+          fi
+
+          created="$(gh api graphql \
+            -f query='mutation($issue: ID!, $repository: ID!, $oid: GitObjectID!, $name: String!) {
+              createLinkedBranch(input: {issueId: $issue, repositoryId: $repository, oid: $oid, name: $name}) {
+                linkedBranch { ref { name } }
+              }
+            }' \
+            -f issue="$issue_id" -f repository="$repository_id" \
+            -f oid="$base_oid" -f name="$branch" \
+            --jq '.data.createLinkedBranch.linkedBranch.ref.name // empty')"
+          if [[ -z "$created" ]]; then
+            echo '::error::GitHub did not confirm linked branch creation.'
+            exit 1
+          fi
+          echo "Created $created from $base_name for Issue #$ISSUE_NUMBER." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Move Issue to In progress in Inclusa Project
+        if: ${{ always() }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.INCLUSA_PROJECT_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [[ -z "$GH_TOKEN" ]]; then
+            echo '::warning::INCLUSA_PROJECT_TOKEN is not configured; Project status was not changed.'
+            echo 'Project status: not changed (missing INCLUSA_PROJECT_TOKEN).' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          project_data="$(gh api graphql \
+            -f query='query($owner: String!, $repo: String!, $number: Int!) {
+              user(login: $owner) {
+                projectV2(number: 4) {
+                  id
+                  fields(first: 30) {
+                    nodes { ... on ProjectV2SingleSelectField {
+                      id name options { id name }
+                    } }
+                  }
+                }
+              }
+              repository(owner: $owner, name: $repo) {
+                issue(number: $number) {
+                  id
+                  projectItems(first: 50) { nodes { id project { id } } }
+                }
+              }
+            }' \
+            -f owner="$OWNER" -f repo="$REPO_NAME" -F number="$ISSUE_NUMBER")"
+
+          project_id="$(jq -r '.data.user.projectV2.id // empty' <<< "$project_data")"
+          issue_id="$(jq -r '.data.repository.issue.id // empty' <<< "$project_data")"
+          field_id="$(jq -r '.data.user.projectV2.fields.nodes[] | select(.name == "Status") | .id' <<< "$project_data")"
+          option_id="$(jq -r '.data.user.projectV2.fields.nodes[] | select(.name == "Status") | .options[] | select((.name | ascii_downcase) == "in progress") | .id' <<< "$project_data")"
+          if [[ -z "$project_id" || -z "$issue_id" || -z "$field_id" || -z "$option_id" ]]; then
+            echo '::error::Inclusa Project #4, Issue, Status field, or In progress option is unavailable.'
+            exit 1
+          fi
+
+          item_id="$(jq -r --arg project "$project_id" \
+            '.data.repository.issue.projectItems.nodes[] | select(.project.id == $project) | .id' \
+            <<< "$project_data")"
+          if [[ -z "$item_id" ]]; then
+            item_id="$(gh api graphql \
+              -f query='mutation($project: ID!, $issue: ID!) {
+                addProjectV2ItemById(input: {projectId: $project, contentId: $issue}) { item { id } }
+              }' \
+              -f project="$project_id" -f issue="$issue_id" \
+              --jq '.data.addProjectV2ItemById.item.id // empty')"
+          fi
+          if [[ -z "$item_id" ]]; then
+            echo '::error::Could not find or add the Issue in Inclusa Project #4.'
+            exit 1
+          fi
+
+          gh api graphql \
+            -f query='mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
+              updateProjectV2ItemFieldValue(input: {
+                projectId: $project, itemId: $item, fieldId: $field,
+                value: {singleSelectOptionId: $option}
+              }) { projectV2Item { id } }
+            }' \
+            -f project="$project_id" -f item="$item_id" \
+            -f field="$field_id" -f option="$option_id" --silent
+          echo "Issue #$ISSUE_NUMBER moved to In progress in Inclusa Project #4." >> "$GITHUB_STEP_SUMMARY"

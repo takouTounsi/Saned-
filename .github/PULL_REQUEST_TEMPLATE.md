@@ -1,37 +1,37 @@
-# Pull Request — Inclusa
+# Inclusa Pull Request
 
-## Issue liée
+## Linked Issue
 
-Référence : #TBD
+Reference: #TBD
 
-## Objectif et périmètre
+## Objective and scope
 
-- Objectif :
-- Inclus :
-- Exclu :
+- Objective:
+- Included:
+- Excluded:
 
-## Changements réalisés
+## Changes made
 
 
 ## Validation
 
-- Commandes et résultats :
-- Critères d'acceptation vérifiés :
-- Points restant à valider par un humain :
+- Commands and results:
+- Acceptance criteria verified:
+- Points awaiting human validation:
 
 ## Documentation
 
-Documents mis à jour ou raison de l'absence de changement :
+Documents updated, or reason no change was needed:
 
-## Architecture, sécurité et vie privée
+## Architecture, security, and privacy
 
-Impact, données utilisées et décisions nécessaires (`TBD` si inconnu) :
+Impact, data used, and decisions needed (`TBD` if unknown):
 
-## Revue
+## Review
 
-- [ ] Issue liée et périmètre respecté
-- [ ] Contrôles pertinents exécutés sans affaiblissement
-- [ ] Documentation et impacts sécurité/vie privée examinés
-- [ ] Revue humaine demandée
+- [ ] Issue linked and scope respected
+- [ ] Relevant checks run without weakening them
+- [ ] Documentation and security and privacy impacts reviewed
+- [ ] Human review requested
 
-La fusion attend la revue et la validation requises. Aucun merge automatique.
+Merging requires the applicable review and validation. No automatic merging.

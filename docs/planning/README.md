@@ -1,28 +1,42 @@
-# Planification et GitHub Project
+# Planning and GitHub Project
 
-## État
+## Status
 
-L'existence et la configuration d'un GitHub Project lié à ce dépôt sont **TBD** : l'accès distant n'a pas été confirmé lors de la préparation locale. Aucun Project n'est créé par cette documentation.
+An existing [Inclusa Project](https://github.com/users/Medmas07/projects/4) is accessible to the authenticated `Medmas07` GitHub CLI account. Test Issues #1 and #2 are both in the Project with Status `Backlog`. Its current Status options are Backlog, Ready, Blocked, In progress, In review, and Done; **Validation** is missing. No Project fields or statuses were changed during the workflow test.
 
-## Configuration recommandée si un Project existe
+## Recommended configuration if a Project exists
 
-| Champ | Valeurs |
+| Field | Values |
 | --- | --- |
 | Status | Backlog, Ready, In Progress, Blocked, In Review, Validation, Done |
 | Priority | P0, P1, P2, P3 |
 | Type | Feature, Bug, Architecture, Research, Documentation, DevOps, Security, Test |
 | Effort | XS, S, M, L, XL |
 
-N'ajouter ces champs que si leur usage est utile à l'équipe. Les Issues restent normalement non assignées jusqu'au choix d'un contributeur. Un workflow GitHub Actions avec `GITHUB_TOKEN` ne dispose pas automatiquement des droits d'écriture sur GitHub Projects V2 ; une automatisation éventuelle exige un jeton ou une GitHub App avec permissions adaptées, une approbation et une étude de sécurité. `SECRET_INCLUSA` n'a pas de rôle connu et ne doit pas être utilisé par supposition.
+Add fields only when they are useful to the team. Issues normally remain unassigned until a contributor chooses them. `GITHUB_TOKEN` does not automatically grant write access to GitHub Projects V2; any automation requires suitable token or GitHub App permissions, approval, and a security review. The purpose and permissions of `SECRET_INCLUSA` are unknown and must not be assumed.
 
-## Mise en place manuelle
+## Manual setup
 
-1. Vérifier le dépôt et les droits du compte dans GitHub.
-2. Ouvrir l'onglet Projects du dépôt ou du propriétaire et identifier un Project existant lié au dépôt.
-3. Examiner les champs existants ; ajouter seulement les valeurs manquantes utiles, avec l'accord des responsables.
-4. Prévoir un affichage par Status et tester les transitions selon le [plan de test](workflow-test.md).
-5. Si aucun Project n'existe, demander l'autorisation avant d'en créer un.
+1. Verify the repository and account permissions on GitHub.
+2. Inspect the repository or owner Projects tab for an existing linked Project.
+3. Review existing fields; add only useful missing values with decision-maker approval.
+4. Provide a Status view and test transitions using the [workflow test plan](workflow-test.md).
+5. If no Project exists, request authorization before creating one.
 
-## Labels des formulaires
+## Issue form labels
 
-Les formulaires utilisent `type:feature`, `type:bug`, `type:research`, `type:task` et `workflow-test`. Après avoir obtenu l'accès au dépôt, vérifier ou créer ces labels dans **Settings → Labels** avant de tester la création d'Issues. Ne pas attribuer automatiquement les Issues à un membre. Les droits d'administration du dépôt peuvent être nécessaires pour gérer les labels.
+The forms reference `type:feature`, `type:bug`, `type:research`, `type:task`, and `workflow-test`. After gaining repository access, verify or create these labels in **Settings → Labels** before testing Issue creation. Do not auto-assign Issues to a team member. Repository administration rights may be required to manage labels.
+
+## Closing an Issue and setting Done
+
+A Pull Request targeting the default branch can close a linked Issue when it is merged if its description includes a closing reference such as `Closes #2`. The Issue must be included in the Project for its Status to change there. GitHub Projects has a built-in **Item closed → Done** workflow, but its enabled state for this Project has not been verified. In the Project, open **Workflows** and check that **Item closed** sets **Status: Done**; enable it if needed. This uses the Project's native automation and does not require a repository secret or a custom GitHub Actions workflow.
+
+[TEST-002](https://github.com/Medmas07/Inclusa/issues/2) is already in the Project. It was created unassigned and has since been self-assigned. The authenticated GitHub CLI token has `read:project` but lacks the `project` scope required for Project mutations; the earlier attempt to add the Issue through the CLI was therefore rejected.
+
+## Self-assignment automation
+
+The [repository workflow](../../.github/workflows/issue-assignment.yml) runs only when the contributor assigns an open Issue to themselves. It creates a GitHub-linked branch from the default branch if the Issue has no linked branch. The `workflow-test` label selects a `test/` branch prefix. It does not create a Pull Request or merge anything.
+
+The branch step uses the built-in `GITHUB_TOKEN` with `contents: write` and `issues: write`, matching a configuration already proven on a previous project. `GITHUB_TOKEN` cannot modify a user-owned Project, and Projects has no built-in "assigned → In progress" workflow. The Project step therefore requires a separate repository Actions secret named `INCLUSA_PROJECT_TOKEN`. Because Project #4 is owned by a user account, use a classic personal access token with the `repo` and `project` scopes; fine-grained tokens do not reliably support user-owned Projects. This secret is **not configured or verified** here. The existing `SECRET_INCLUSA` must not be reused without knowing its purpose. If the dedicated token is absent, the workflow reports that Project status was not changed; it does not claim success for that step. Project #4 currently calls the target status `In progress`, which the workflow resolves by name.
+
+Publish the workflow on `main` before testing a new assignment. Assignments made before publication do not replay. For [Issue #2](https://github.com/Medmas07/Inclusa/issues/2), unassign and self-assign again after publication, then check the Actions run, linked branch, and Project status. Do not rely on this automation as operational until a remote run confirms both steps.

@@ -1,14 +1,14 @@
-# Documentation Inclusa
+# Inclusa documentation
 
-Cette documentation distingue les hypothèses, les exigences validées et les décisions acceptées. À ce jour, aucune fonctionnalité produit ni décision d'architecture n'est approuvée ou implémentée.
+This documentation distinguishes hypotheses, validated requirements, and accepted decisions. No product feature or architecture decision is currently approved or implemented.
 
-- [Vision produit](product/vision.md) : idées exploratoires.
-- [État actuel](../CURRENT_STATUS.md) : avancement et vérifications restantes.
-- [Journal des changements](../CHANGELOG.md) : historique des changements du dépôt.
-- [Questions ouvertes](product/open-questions.md) : validations à obtenir.
-- [Architecture](architecture.md) : contexte, contraintes et options à étudier.
-- [Décisions](decisions/README.md) : règles et trame des ADR.
-- [Planification](planning/README.md) : configuration recommandée du Project.
-- [Tests du flux](planning/workflow-test.md) : procédure et journal des tests collaboratifs.
+- [Current status](../CURRENT_STATUS.md): progress and remaining verification.
+- [Changelog](../CHANGELOG.md): repository change history.
+- [Product vision](product/vision.md): exploratory ideas.
+- [Open questions](product/open-questions.md): validation still needed.
+- [Architecture](architecture.md): context, constraints, and options to assess.
+- [Decisions](decisions/README.md): ADR process and template.
+- [Planning](planning/README.md): recommended GitHub Project configuration.
+- [Workflow tests](planning/workflow-test.md): procedure and test log.
 
-Les documents destinés à l'équipe sont rédigés en français. `TBD` indique une information non confirmée.
+Project documentation is written in English. `TBD` marks unconfirmed information.

@@ -1,29 +1,29 @@
-# Contribuer à Inclusa
+# Contributing to Inclusa
 
-## Cycle d'une Issue
+## Issue lifecycle
 
-`Backlog → Ready → auto-attribution → In Progress → branche dédiée → travail → Pull Request → In Review → Validation → Done`
+`Backlog → Ready → self-assignment → In Progress → dedicated branch → work → Pull Request → In Review → Validation → Done`
 
-`Blocked` signale un obstacle explicite ; son motif et la condition de déblocage sont documentés dans l'Issue. Les Issues commencent normalement sans responsable. Chacun choisit son sujet et se l'assigne avant de commencer. Aucune attribution permanente automatique par membre. Une Issue correspond à une branche focalisée et une Pull Request présente un lien clair avec cette Issue. Les statuts du Project ne sont utilisés que si le Project est accessible et configuré.
+Use `Blocked` when a specific obstacle exists; record the reason and unblocking condition in the Issue. Issues normally start unassigned. Contributors choose work and assign themselves before starting. There is no automatic permanent allocation by team member. One Issue should map to one focused branch, and each Pull Request should clearly link to its Issue. Project statuses apply only if an accessible Project is configured.
 
-## Avant de commencer
+## Before starting
 
-Vérifier le contexte, les critères d'acceptation, les dépendances et la validation prévue. Les idées produit ne deviennent pas des tickets d'implémentation sans autorisation explicite. Déplacer l'Issue vers `In Progress` si le Project le permet.
+Check the context, acceptance criteria, dependencies, and intended validation. Product ideas do not become implementation tickets without explicit authorization. Move the Issue to `In Progress` if the Project supports it.
 
-## Branches et commits
+## Branches and commits
 
-Créer une branche depuis `main` au format `type/numero-description`, par exemple `docs/125-guide-contribution`, `research/126-regles-officielles`, `architecture/127-options-hebergement`, `test/128-flux-issues`, `devops/129-controle-ci`, `feat/123-description` ou `fix/124-description` lorsque le développement produit sera autorisé. Ne pas travailler directement sur `main` pour un changement substantiel.
+Create a branch from `main` using `type/number-description`, such as `docs/125-contribution-guide`, `research/126-official-rules`, `architecture/127-hosting-options`, `test/128-issue-workflow`, or `devops/129-ci-check`. Use `feat/123-description` and `fix/124-description` when product development is authorized. Do not perform substantive work directly on `main`.
 
-Employer Conventional Commits : `docs(repo): initialize documentation`, `chore(github): configure issue templates`, `ci(workflow): add documentation validation`, `test(workflow): verify issue lifecycle`.
+Use Conventional Commits: `docs(repo): initialize documentation`, `chore(github): configure issue templates`, `ci(workflow): add documentation validation`, or `test(workflow): verify issue lifecycle`.
 
 ## Pull Requests
 
-Utiliser la trame fournie. Indiquer l'Issue liée (`Closes #123` seulement si la fusion doit réellement la clôturer), le périmètre, les exclusions, la preuve de validation, les changements documentaires et l'impact sécurité/vie privée. Demander une revue humaine. Une Pull Request non revue ou non fusionnée n'est pas Done. Aucune fusion automatique.
+Use the provided template. Link the Issue (`Closes #123` only when merging should actually close it), define scope and exclusions, provide validation evidence, note documentation changes, and address security and privacy impacts. Request human review. An unreviewed or unmerged Pull Request is not Done. Do not enable automatic merging.
 
-## Qualité et sécurité
+## Quality and security
 
-Exécuter `python scripts/validate_repo.py` après les changements de gouvernance ; la CI exécute le même contrôle. Ajouter les vérifications pertinentes pour tout futur code autorisé, sans affaiblir les contrôles existants. N'utiliser que des données synthétiques. Ne jamais committer de secrets ou de documents administratifs réels. Justifier toute nouvelle dépendance et consigner les choix d'architecture dans un ADR proposé avant décision.
+Run `python scripts/validate_repo.py` after governance changes; CI runs the same check. Add relevant checks for any future authorized code without weakening existing ones. Use only synthetic test data. Never commit secrets or real administrative documents. Justify new dependencies and propose structural architecture choices in an ADR before treating them as decisions.
 
-## Définition de Done
+## Definition of Done
 
-Objectif atteint ; critères d'acceptation satisfaits ; périmètre respecté ; tests requis réussis ; documentation mise à jour ; confidentialité et sécurité traitées ; revues requises terminées ; validation effectuée ; fusion selon le processus approuvé.
+The objective is achieved; acceptance criteria are satisfied; scope is respected; required tests pass; documentation is updated; security and privacy are addressed; required reviews and validation are complete; and changes are merged through the approved workflow.
