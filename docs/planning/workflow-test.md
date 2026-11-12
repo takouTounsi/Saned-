@@ -13,7 +13,7 @@ Create at most three temporary Issues prefixed `[TEST]` and labeled `workflow-te
 | ID | Checks | Initial state |
 | --- | --- | --- |
 | TEST-001 | Issue creation, label, manual self-assignment, and status transition if a Project exists | Partially passed |
-| TEST-002 | Branch naming, Issue-to-branch traceability, PR template, linking, review, and validation; do not create a remote branch or PR without separate authorization | Not run |
+| TEST-002 | Branch naming, Issue-to-branch traceability, PR template, linking, review, merge into `main`, automatic Issue closure, and Project Done status | Ticket ready for manual test |
 | TEST-003 | Ready → In Progress → In Review → Validation → Done transitions; Project changes only when authorized | Not run |
 
 ## Test log
@@ -29,5 +29,11 @@ Create at most three temporary Issues prefixed `[TEST]` and labeled `workflow-te
 | 2026-11-12 | Retry TEST-001 with authenticated GitHub CLI | Passed | [Issue #1](https://github.com/Medmas07/Inclusa/issues/1) created unassigned, labeled `workflow-test`, then assigned to `Medmas07` |
 | 2026-11-12 | Create dedicated branch for assigned Issue #1 | Passed | Remote branch `test/1-verify-issue-workflow` created from published `main` (`84977a4`) |
 | 2026-11-12 | Inspect existing Inclusa Project | Partially passed | [Project #4](https://github.com/users/Medmas07/projects/4) exists; Status lacks Validation; item linkage and transitions untested |
+| 2026-11-12 | Create unassigned TEST-002 for manual PR merge test | Passed | [Issue #2](https://github.com/Medmas07/Inclusa/issues/2) was created unassigned and labeled `workflow-test`; it has since been self-assigned |
+| 2026-11-12 | Inspect TEST-002 after self-assignment | Partial | Assignee is `Medmas07`; Project Status remains `Backlog`; no remote branch for Issue #2; only documentation CI was published |
+| 2026-11-12 | Inspect Project membership | Passed | Issues #1 and #2 are both in Inclusa Project #4 with Status `Backlog` |
+| 2026-11-12 | Attempt to add TEST-002 to Inclusa Project with CLI | Blocked | CLI token has `read:project` but lacks required `project` scope; the Issue was already present through another path |
+| 2026-11-12 | Prepare self-assignment workflow locally | Prepared | Linked branch and `In progress` update configured; requires publication and dedicated Project token before remote validation |
+| 2026-11-12 | Check prerequisites before publication | Partial | Issue #2 is unassigned again; `INCLUSA_PROJECT_TOKEN` is not configured |
 | TBD | GitHub Actions CI | Not run | Must be observed on GitHub |
-| TBD | TEST-002 and TEST-003 | Not run | PR creation and Project mutations require separate authorization |
+| TBD | TEST-002 merge and TEST-003 | Not run | Manual PR test and Project access still pending |
