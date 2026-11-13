@@ -1,0 +1,130 @@
+name: Reconcile blocked PoC issues
+
+on:
+  issues:
+    types: [closed, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+
+concurrency:
+  group: poc-dependency-status
+  cancel-in-progress: false
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Count open native blockers
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          : > blocker-counts.tsv
+
+          gh api --paginate \
+            "repos/$REPOSITORY/issues?state=open&labels=poc-3days&per_page=100" \
+            --jq '.[] | select(.pull_request == null) | .number' |
+          while IFS= read -r number; do
+            dependencies="$(gh api \
+              -H 'X-GitHub-Api-Version: 2026-03-10' \
+              "repos/$REPOSITORY/issues/$number/dependencies/blocked_by")"
+            total="$(jq 'length' <<< "$dependencies")"
+            if (( total == 0 )); then
+              continue
+            fi
+            open="$(jq '[.[] | select(.state == "open")] | length' <<< "$dependencies")"
+            printf '%s\t%s\n' "$number" "$open" >> blocker-counts.tsv
+          done
+
+      - name: Reconcile Inclusa Project Status
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.SECRET_INCLUSA }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if [[ -z "$GH_TOKEN" ]]; then
+            echo '::error::SECRET_INCLUSA is unavailable for Project automation.'
+            exit 1
+          fi
+          if [[ ! -s blocker-counts.tsv ]]; then
+            echo 'No open PoC issues with native blockers.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          project="$(gh api graphql \
+            -f query='query($owner: String!) {
+              user(login: $owner) {
+                projectV2(number: 4) {
+                  id
+                  fields(first: 30) {
+                    nodes { ... on ProjectV2SingleSelectField {
+                      id name options { id name }
+                    } }
+                  }
+                  items(first: 100) {
+                    nodes {
+                      id
+                      content { ... on Issue { number repository { nameWithOwner } } }
+                      fieldValues(first: 20) {
+                        nodes { ... on ProjectV2ItemFieldSingleSelectValue {
+                          name field { ... on ProjectV2FieldCommon { name } }
+                        } }
+                      }
+                    }
+                  }
+                }
+              }
+            }' -f owner='Medmas07')"
+
+          project_id="$(jq -r '.data.user.projectV2.id // empty' <<< "$project")"
+          status_field="$(jq -r '.data.user.projectV2.fields.nodes[] | select(.name == "Status") | .id' <<< "$project")"
+          blocked_option="$(jq -r '.data.user.projectV2.fields.nodes[] | select(.name == "Status") | .options[] | select(.name == "Blocked") | .id' <<< "$project")"
+          backlog_option="$(jq -r '.data.user.projectV2.fields.nodes[] | select(.name == "Status") | .options[] | select(.name == "Backlog") | .id' <<< "$project")"
+          if [[ -z "$project_id" || -z "$status_field" || -z "$blocked_option" || -z "$backlog_option" ]]; then
+            echo '::error::Inclusa Project #4 or required Status options are unavailable.'
+            exit 1
+          fi
+
+          while IFS=$'\t' read -r number open; do
+            item="$(jq -r --arg repo "$REPOSITORY" --argjson number "$number" \
+              '.data.user.projectV2.items.nodes[] | select(.content.number == $number and .content.repository.nameWithOwner == $repo) | .id' \
+              <<< "$project")"
+            current="$(jq -r --arg repo "$REPOSITORY" --argjson number "$number" \
+              '.data.user.projectV2.items.nodes[] | select(.content.number == $number and .content.repository.nameWithOwner == $repo) | .fieldValues.nodes[] | select(.field.name == "Status") | .name' \
+              <<< "$project")"
+            if [[ -z "$item" ]]; then
+              echo "::error::Issue #$number is not in Inclusa Project #4."
+              exit 1
+            fi
+
+            option=''
+            target=''
+            if (( open > 0 )) && [[ "$current" != 'Blocked' ]]; then
+              option="$blocked_option"
+              target='Blocked'
+            elif (( open == 0 )) && [[ "$current" == 'Blocked' ]]; then
+              option="$backlog_option"
+              target='Backlog'
+            fi
+            if [[ -z "$option" ]]; then
+              continue
+            fi
+
+            gh api graphql \
+              -f query='mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
+                updateProjectV2ItemFieldValue(input: {
+                  projectId: $project, itemId: $item, fieldId: $field,
+                  value: {singleSelectOptionId: $option}
+                }) { projectV2Item { id } }
+              }' \
+              -f project="$project_id" -f item="$item" \
+              -f field="$status_field" -f option="$option" --silent
+            echo "Issue #$number: $current -> $target ($open open blockers)" >> "$GITHUB_STEP_SUMMARY"
+          done < blocker-counts.tsv

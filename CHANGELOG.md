@@ -9,6 +9,7 @@ This file records repository changes. **Unreleased** entries describe changes th
 - Converted project documentation and GitHub templates to English and clarified the project's professional positioning.
 - Updated the repository status to reflect the current local Git tracking state.
 - Recorded the authenticated TEST-001 Issue, self-assignment, dedicated branch, and existing Project configuration; Project transitions remain untested.
+- Prepared native PoC dependency status reconciliation for the Inclusa Project: open blockers imply `Blocked`, and the last resolved blocker returns a blocked item to `Backlog`.
 - Prepared self-assignment automation for linked branches and Project `In progress` status; remote execution and Project token setup remain pending.
 - Authorized `SECRET_INCLUSA` for Projects automation in AGENTS.md and used it for the `In progress` status update; a missing secret now fails the run.
 
