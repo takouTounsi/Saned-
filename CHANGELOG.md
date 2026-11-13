@@ -4,6 +4,10 @@ This file records repository changes. **Unreleased** entries describe changes th
 
 ## Unreleased
 
+### Added
+
+- Built the POC-02 local demo foundation: navigable screens, fictional fixtures, a resettable shared store, and deterministic mock assistant/OCR interfaces with no external dependency.
+
 ### Changed
 
 - Converted project documentation and GitHub templates to English and clarified the project's professional positioning.
