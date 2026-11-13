@@ -8,7 +8,11 @@ Social assistance procedures can be difficult to navigate, and incomplete applic
 
 ## Current stage
 
-The repository is being prepared for collaborative engineering. No product feature has been implemented, no product requirement has been validated, and no architecture decision has been accepted. Unknowns are marked `TBD`. See [Current Status](CURRENT_STATUS.md) for the latest repository and verification status.
+The repository has a local, fictional [demo foundation](demo/README.md) under development for POC-02. Product requirements and architecture choices still need validation; no architecture decision has been accepted. Unknowns are marked `TBD`. See [Current Status](CURRENT_STATUS.md) for the latest repository and verification status.
+
+## Run the local demo
+
+From the repository root, run `python -m http.server 4173 --bind 127.0.0.1 --directory demo`, then open `http://127.0.0.1:4173/`. The prototype needs no secret, external API, package installation, or Internet connection. See the [demo guide](demo/README.md) for contracts and checks.
 
 ## Collaboration
 
@@ -26,6 +30,7 @@ Contributors select focused Issues and assign themselves before starting. Each I
 | [Architecture](docs/architecture.md) | Constraints and candidate components |
 | [Architecture decisions](docs/decisions/README.md) | ADR process and accepted decisions |
 | [Planning](docs/planning/README.md) | GitHub Project configuration and workflow tests |
+| [Demo foundation](demo/README.md) | Local startup, shared contracts, and mock provider interfaces |
 
 An architecture proposal becomes a decision only after human review and an ADR marked **Accepted**. A proposed capability becomes a requirement only after explicit validation by project decision-makers. Documentation must preserve these distinctions.
 
