@@ -11,5 +11,6 @@ This documentation distinguishes hypotheses, validated requirements, and accepte
 - [Planning](planning/README.md): recommended GitHub Project configuration.
 - [Workflow tests](planning/workflow-test.md): procedure and test log.
 - [Demo foundation](../demo/README.md): local startup and shared mock contracts.
+- [Team specification v1](inclusa-spec-v1.md): working scope agreed by the team; external validation remains pending.
 
 Project documentation is written in English. `TBD` marks unconfirmed information.
