@@ -7,6 +7,8 @@ This file records repository changes. **Unreleased** entries describe changes th
 ### Added
 
 - Built the POC-02 local demo foundation: navigable screens, fictional fixtures, a resettable shared store, and deterministic mock assistant/OCR interfaces with no external dependency.
+- Documented the POC-01 Fatma scenario, three real Ministry programme families, source provenance, and a deterministic demo flow with synthetic data and explicit unknowns.
+- Configured the three POC-04 demo services in one registry, with source-linked sample items, provisional multilingual copy, selectable catalogue cards, and planned synthetic document fixtures.
 
 ### Changed
 
@@ -16,6 +18,8 @@ This file records repository changes. **Unreleased** entries describe changes th
 - Prepared native PoC dependency status reconciliation for the Inclusa Project: open blockers imply `Blocked`, and the last resolved blocker returns a blocked item to `Backlog`.
 - Prepared self-assignment automation for linked branches and Project `In progress` status; remote execution and Project token setup remain pending.
 - Authorized `SECRET_INCLUSA` for Projects automation in AGENTS.md and used it for the `In progress` status update; a missing secret now fails the run.
+- Added an agent instruction to update this changelog and `CURRENT_STATUS.md` whenever one change adds or modifies more than 500 lines.
+- Refreshed `CURRENT_STATUS.md` to distinguish merged POC code from the open POC-06.01 routing-fixture PR and remaining demo work.
 
 ## Initial governance bootstrap
 

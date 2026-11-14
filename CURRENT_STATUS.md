@@ -1,30 +1,35 @@
 # Current status of Inclusa
 
-**Updated November 13, 2026.** This document describes observed repository and GitHub verification status. It does not replace decisions or Issues.
+**Updated November 14, 2026.** This is an observed repository snapshot, not a product approval or a replacement for Issues and accepted ADRs.
 
-## Project
+## Project and decisions
 
-Inclusa is preparing a fictional local demo under authorized POC-02. The [product vision](docs/product/vision.md) and [candidate components](docs/architecture.md) still require validation. Validated production product requirements: **none**. Accepted architecture decisions: **none**.
+Inclusa is a disposable, offline social-services demonstration for the Social Tech Challenge 2026. The three selected Ministry programme families are real; the beneficiary, documents, answers, checklist samples, appointments, and worker actions are synthetic. Product and institutional process details still need MAS/ULPS validation. Validated production requirements: **none**. Accepted architecture decisions: **none**. See the [POC-01 source profiles](docs/poc/POC-01-service-profiles.md) and [demo flow](docs/poc/POC-01-demo-flow.md).
 
-## Local repository
+## Implemented on `main`
 
-- The local checkout is on the dedicated POC-02 Issue #8 branch. A pre-existing uncommitted `.gitignore` change and two untracked documents remain untouched by this work.
-- The [demo foundation](demo/README.md) runs locally without external services. It is under development and has not been reviewed or merged.
+- **POC-01 (#7):** source-backed service framing, one Fatma hero story, and a scripted golden path with two lighter routes are documented.
+- **POC-02 (#8):** a browser demo runs locally with Home, Services, and Dossier screens, a shared resettable state in localStorage with a memory fallback, and replaceable mock assistant/OCR provider interfaces.
+- **POC-04 (#10):** exactly three service profiles are configured and selectable. The catalogue and dossier sample list read the same registry. Fatma's synthetic profile and planned clear/blurred/mismatch document fixtures are present. A displayed sample list is not an official or computed completeness check.
 
-## GitHub verification
+Run the current demo and tests using [demo/README.md](demo/README.md). The programme names are source-linked, while the Arabic/Derja copy and administrative applicability need review. No real beneficiary data, official identity document, credential, or integration is included.
 
-- Configured remote: `https://github.com/Medmas07/Inclusa`.
-- GitHub CLI is authenticated as `Medmas07` and can access the private repository. The GitHub connector uses a different account and does not have access to it.
-- [TEST-003 (Issue #4)](https://github.com/Medmas07/Inclusa/issues/4) is closed and its Project item is Done.
-- An existing [Inclusa Project](https://github.com/users/Medmas07/projects/4) was found. Its Status options are Backlog, Ready, Blocked, In progress, In review, and Done; **Validation** is absent.
-- PoC Issues POC-01 through POC-18 are open as [Issues #7–#24](https://github.com/Medmas07/Inclusa/issues). They have English titles and descriptions and 38 verified native dependency relationships. POC-02 is assigned to Medmas07 and has a linked branch.
-- The [self-assignment workflow](.github/workflows/issue-assignment.yml) is on `main` and uses `SECRET_INCLUSA` only for Project updates. The [dependency status workflow](.github/workflows/dependency-status.yml) is in [PR #26](https://github.com/Medmas07/Inclusa/pull/26) and awaits review and remote validation after merge.
+## In progress and missing from the runnable journey
 
-## Next steps
+- [POC-06.01 (#49)](https://github.com/Medmas07/Inclusa/issues/49) is open and In progress. [PR #87](https://github.com/Medmas07/Inclusa/pull/87) adds nine exact French, Derja Arabic-script, and Arabizi routing fixtures. Its repository-validation checks passed, but the PR remains open and the fixtures are not yet wired to the assistant provider or UI.
+- The assistant still returns a placeholder reply; mock OCR returns no extraction. There is no guided form, document upload, computed checklist, simulated booking, worker view, or complete end-to-end journey. These belong to later authorized POC Issues.
+- Among the 18 top-level POC Issues (#7–#24), #7, #8, and #10 are closed and Done. #9 is in Backlog; the remaining top-level Issues are currently Blocked. Closing reviewed Issues has been observed to move their Project items to Done.
 
-1. Review the POC-02 foundation and its acceptance criteria before a PR is merged.
-2. Review and merge the dependency status workflow through the approved contribution process, then verify a remote run before relying on automatic Blocked → Backlog transitions.
-3. Review the existing Project configuration against the [recommended workflow](docs/planning/README.md), including the missing Validation status.
-4. Verify that the Project's built-in **Item closed → Done** automation is enabled before a PR merge test.
+## Local repository and verification
 
-Never add a secret or a real beneficiary document to this repository.
+- Remote: `https://github.com/Medmas07/Inclusa`. The latest fetched `origin/main` includes merged POC-01, POC-02, and POC-04 work. The local `main` branch is behind `origin/main`; use the remote tracking ref for new branches until it is updated.
+- This documentation update is separate from [PR #87](https://github.com/Medmas07/Inclusa/pull/87) and does not change its routing fixtures.
+- The latest local JavaScript run passed 11 tests; repository validation passed. These checks do not establish browser usability or official process accuracy.
+
+## Next checks
+
+1. Review and validate PR #87, including native-speaker review of the provisional prompts, before merge.
+2. Continue the authorized UI, dialogue, dossier, checklist, upload, appointment, and worker tickets in dependency order; keep the offline golden path deterministic.
+3. Confirm source currency, document applicability, territorial ULPS, and any appointment process with MAS/ULPS mentors before presenting citizen guidance as verified.
+
+Never add secrets or real beneficiary documents to the repository.

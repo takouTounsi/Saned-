@@ -29,6 +29,7 @@ A product vision or **Proposed** ADR is neither an approved requirement nor an a
 
 - Run relevant checks and provide verifiable results. Never weaken tests to make CI pass.
 - Update documentation affected by approved changes. Write project documentation in English; technical configuration may also use English.
+- When a change adds or modifies more than 500 lines in total, update both `CHANGELOG.md` and `CURRENT_STATUS.md` in the same change. Describe the work and its actual verification state; do not present unfinished work as complete.
 - Do not mark work **Done** merely because it compiles or has an unreviewed Pull Request.
 
 ## Security and privacy
