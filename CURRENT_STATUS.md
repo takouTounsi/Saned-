@@ -22,7 +22,7 @@ Run the current demo and tests using [demo/README.md](demo/README.md). The progr
 
 ## Local repository and verification
 
-- Remote: `https://github.com/Medmas07/Inclusa`. The latest fetched `origin/main` includes merged POC-01, POC-02, and POC-04 work. The local `main` branch is behind `origin/main`; use the remote tracking ref for new branches until it is updated.
+- Remote: `https://github.com/Medmas07/Inclusa`. The local `main` and `origin/main` include merged POC-01, POC-02, and POC-04 work and were synchronized for this snapshot. Fetch before creating later branches to see subsequent remote changes.
 - This documentation update is separate from [PR #87](https://github.com/Medmas07/Inclusa/pull/87) and does not change its routing fixtures.
 - The latest local JavaScript run passed 11 tests; repository validation passed. These checks do not establish browser usability or official process accuracy.
 
