@@ -1,0 +1,29 @@
+{
+  "title": "Your application file",
+  "slots": [
+    {
+      "id": "cin_front",
+      "label": "National ID – front",
+      "type": "cin",
+      "format": "card"
+    },
+    {
+      "id": "cin_back",
+      "label": "National ID – back",
+      "type": "generic",
+      "format": "card"
+    },
+    {
+      "id": "doc3",
+      "label": "Document 3",
+      "type": "generic",
+      "format": "a4"
+    },
+    {
+      "id": "doc4",
+      "label": "Document 4",
+      "type": "generic",
+      "format": "a4"
+    }
+  ]
+}
