@@ -9,6 +9,7 @@ This file records repository changes. **Unreleased** entries describe changes th
 - Built the POC-02 local demo foundation: navigable screens, fictional fixtures, a resettable shared store, and deterministic mock assistant/OCR interfaces with no external dependency.
 - Documented the POC-01 Fatma scenario, three real Ministry programme families, source provenance, and a deterministic demo flow with synthetic data and explicit unknowns.
 - Configured the three POC-04 demo services in one registry, with source-linked sample items, provisional multilingual copy, selectable catalogue cards, and planned synthetic document fixtures.
+- Added `ocr-scanner/`, a local FastAPI spike for POC-16 (#78) that captures a CIN photo from a phone, runs image quality checks, card detection and EasyOCR, and extracts fields for user confirmation; not wired to `demo/`, and acceptance still needs synthetic samples and a results write-up.
 
 ### Changed
 

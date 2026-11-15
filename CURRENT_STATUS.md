@@ -17,6 +17,7 @@ Run the current demo and tests using [demo/README.md](demo/README.md). The progr
 ## In progress and missing from the runnable journey
 
 - [POC-06.01 (#49)](https://github.com/Medmas07/Inclusa/issues/49) is open and In progress. [PR #87](https://github.com/Medmas07/Inclusa/pull/87) adds nine exact French, Derja Arabic-script, and Arabizi routing fixtures. Its repository-validation checks passed, but the PR remains open and the fixtures are not yet wired to the assistant provider or UI.
+- [POC-16 (#78)](https://github.com/Medmas07/Inclusa/issues/78) has an open, unreviewed pull request adding `ocr-scanner/`, a local CIN scanner spike (phone capture, quality checks, EasyOCR). It is not wired to `demo/`, was only tried on personal captures that are not in the repository, and its acceptance criteria remain pending until synthetic sample images and a results and limitations table exist.
 - The assistant still returns a placeholder reply; mock OCR returns no extraction. There is no guided form, document upload, computed checklist, simulated booking, worker view, or complete end-to-end journey. These belong to later authorized POC Issues.
 - Among the 18 top-level POC Issues (#7–#24), #7, #8, and #10 are closed and Done. #9 is in Backlog; the remaining top-level Issues are currently Blocked. Closing reviewed Issues has been observed to move their Project items to Done.
 
