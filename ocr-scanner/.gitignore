@@ -1,0 +1,9 @@
+# Runtime data: real captures and confirmed fields must never be committed
+data/
+# Generated self-signed TLS certificates and private keys
+certs/
+__pycache__/
+*.pyc
+.venv/
+# Written by debug_ocr.py
+debug_card.jpg
