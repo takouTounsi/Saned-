@@ -10,6 +10,8 @@ This file records repository changes. **Unreleased** entries describe changes th
 - Documented the POC-01 Fatma scenario, three real Ministry programme families, source provenance, and a deterministic demo flow with synthetic data and explicit unknowns.
 - Configured the three POC-04 demo services in one registry, with source-linked sample items, provisional multilingual copy, selectable catalogue cards, and planned synthetic document fixtures.
 
+- Added the POC-06.02/06.03 scripted dialogue manager: keyword and fact rules over the three configured services, one question per turn, manual-choice fallback, no eligibility statements, French/Derja/Arabizi reply copy (pending native-speaker review), config-driven `whereToGet` document explanations, and 19 routing fixtures. It is offline and rule-based, not a language model.
+
 ### Changed
 
 - Converted project documentation and GitHub templates to English and clarified the project's professional positioning.
