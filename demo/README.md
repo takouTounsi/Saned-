@@ -28,6 +28,23 @@ Open `http://127.0.0.1:4173/` in a browser. Stop the server with Ctrl+C. Python 
 
 The service catalogue lets a user select A, B, or C and see its demo-only sample list in the draft dossier. Saved local sessions reload the current registry, so a configuration edit updates the catalogue and sample list. This is a display of planned examples, not a completed checklist or official decision. Guided forms, document uploads, OCR, worker actions, and real providers belong to later Issues. Arabic and Derja wording still needs native-speaker review; MAS/ULPS must validate applicable documents, current sources, and any real-world process.
 
+## Experimental: local LLM intent extraction (POC-17, opt-in)
+
+Scripted mode stays the **default**. An opt-in "Mode LLM local (expérimental)" toggle on the Assistant screen (or `?llm=1`, optionally `&model=<name>`) asks a **local** Ollama model to extract only `{intent, languageOrScript, facts}` from the user's message ([#80](https://github.com/Medmas07/Inclusa/issues/80), [#81](https://github.com/Medmas07/Inclusa/issues/81)). `llm-intent.js` validates it against an allowlist in plain JS (allowlisted intents, `fr|derja-ar|arabizi`, allowlisted fact keys with strict types such as child ages as integers 0-18); anything else is dropped or the whole extraction is rejected. The scripted dialogue manager then merges the validated facts and still decides the service, the next question, the reply text, documents and every guardrail. The model never writes user-facing text and never decides eligibility or required documents; an eligibility or document list in its output is ignored. Each assistant message shows a small "LLM" or "scripté" tag. On any failure (Ollama not running, network error, timeout after about 8 s, invalid JSON, schema violation) the turn is answered by the scripted path with the note "LLM indisponible — mode scripté utilisé".
+
+Honest status: **experimental, not validated on Derja or Arabizi** (no measurement has been run yet, see [the benchmark template](../docs/poc/POC-17-llm-benchmark.md)). The model is local (default `qwen2.5:3b`), there is no cloud API, key or secret, and the base URL must be loopback (`127.0.0.1`, `localhost`, `[::1]`) or nothing is sent. Settings live in `DEFAULT_LLM_SETTINGS` (`baseUrl`, `model`, `timeoutMs`) in `llm-intent.js`.
+
+To try it (requires [Ollama](https://ollama.com), which is not installed by this repository):
+
+```sh
+ollama pull qwen2.5:3b
+ollama serve
+python -m http.server 4173 --bind 127.0.0.1 --directory demo
+# open http://127.0.0.1:4173/?llm=1  (or tick the toggle on the Assistant screen)
+```
+
+Ollama accepts browser requests from `http://127.0.0.1:*` and `http://localhost:*` origins by default. If the demo is served from another origin, start Ollama with `OLLAMA_ORIGINS` set to that origin (for example `OLLAMA_ORIGINS=http://192.168.1.20:4173 ollama serve`). Run the six-phrase benchmark with `node demo/bench/llm-intent-bench.mjs` (add `--write` to update the benchmark document); without a reachable Ollama it prints `blocked: Ollama not reachable at ...` and exits with code 1. The tests use a fake `fetch` and never touch the network.
+
 ## Validate
 
 ```sh

@@ -12,6 +12,7 @@ This file records repository changes. **Unreleased** entries describe changes th
 
 - Added the POC-06.02/06.03 scripted dialogue manager: keyword and fact rules over the three configured services, one question per turn, manual-choice fallback, no eligibility statements, French/Derja/Arabizi reply copy (pending native-speaker review), config-driven `whereToGet` document explanations, and 19 routing fixtures. It is offline and rule-based, not a language model.
 - Added the POC-06.04 Assistant chat screen (bubbles, quick replies, example prompts, service suggestion card with a "Préparer ce dossier" action, manual-choice fallback, visible simulation badge, persisted conversation) and restyled the demo shell with a navy/gold look inspired by the Ministry site, using system fonts only.
+- Added an opt-in, experimental local LLM intent-extraction spike (POC-17.01/17.02): a strict allowlist validator, an Ollama client with timeout and scripted fallback, an Assistant-screen toggle with per-message mode tags, and a six-phrase benchmark script. Scripted mode stays the default and the model never writes replies or decides eligibility or documents; the benchmark has not been run yet.
 
 ### Changed
 
