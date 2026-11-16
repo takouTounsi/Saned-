@@ -24,3 +24,6 @@ __pycache__/
 .pytest_cache/
 .coverage
 inclusa-llm-tests/
+/frontend/node_modules/
+/frontend/dist/
+/pytest-cache-files-*/

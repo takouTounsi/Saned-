@@ -12,6 +12,7 @@ A product vision or **Proposed** ADR is neither an approved requirement nor an a
 
 ## Constraints and responsibilities
 
+- Treat `demo/` as a legacy reference for reusable logic only. It is outside the active application, is not started by the local service pack, and must not be presented as the current frontend or end-to-end workflow. Preserve it unless a separate request explicitly changes it.
 - Preserve the institutional principles: small, targeted AI; open-source solutions; local or on-premise hosting to assess; interoperability; human decision-making; confidentiality; security; and accessibility.
 - Treat components in `docs/architecture.md` as candidates. Do not invent APIs, schemas, services, or infrastructure choices.
 - Keep documentation, forms, workflows, and checks consistent. Do not introduce dependencies without a documented justification.
