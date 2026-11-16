@@ -53,13 +53,14 @@ Also tunable via env: MIN_SHARPNESS, MAX_GLARE.
 ## OCR engines (Falcon OCR)
 The default `OCR_ENGINE=auto` selects **Falcon OCR on CUDA** when this scanner process has CUDA. On a machine without a detected NVIDIA GPU it selects **EasyOCR on CPU**. The [single-command launcher](../falcon_gpu/README.md) handles a GPU computer differently when the scanner `.venv` has CPU-only PyTorch: it runs a persistent Falcon worker with the host CUDA PyTorch and selects `falcon_http` in the scanner. Explicit `OCR_ENGINE=easyocr`, `falcon`, `falcon_http`, and `falcon_cli` settings remain available for development.
 
-**Recommended on this machine:** keep the existing host CUDA PyTorch installation and run `python scripts/start_local.py` from the repository root. The launcher creates `falcon_gpu/.venv` with access to the host CUDA packages, installs Falcon dependencies there, and keeps the scanner in its own environment. The first model download needs disk space; set `HF_HOME` to a larger drive if necessary. Verify Falcon at `http://127.0.0.1:8002/health` (`device: cuda:0`) and the scanner at `http://127.0.0.1:8000/api/health` (`ocr_engine: falcon_http`).
+**Recommended on this machine:** run `python scripts/start_local.py` from the repository root. The launcher creates `falcon_gpu/.venv` with access to host CUDA packages, installs the compatible PyTorch and Triton versions in that worker environment when needed, and keeps the scanner in its own environment. The first installation and model download need disk space; set `HF_HOME` to a drive with room if necessary. Verify Falcon at `http://127.0.0.1:8002/health` (`device: cuda:0`) and the scanner at `http://127.0.0.1:8000/api/health` (`ocr_engine: falcon_http`).
 
-For a **manual, scanner-only** local Falcon process, install CUDA PyTorch inside `ocr-scanner/.venv`. This example matches the CUDA 12.1 build verified in host Python; select another supported build from the [official PyTorch installer](https://pytorch.org/get-started/locally/) if needed:
+For a **manual, scanner-only** local Falcon process, install CUDA PyTorch 2.9.1 and a matching Triton Windows 3.5 build inside `ocr-scanner/.venv`. The pinned Falcon model revision imports `AuxRequest`, which older PyTorch builds lack. Use the [official PyTorch wheel matrix](https://pytorch.org/get-started/previous-versions/) for the matching CUDA build:
 
 ```powershell
 cd ocr-scanner
-.\.venv\Scripts\python.exe -m pip install torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu121
+.\.venv\Scripts\python.exe -m pip install --no-cache-dir torch==2.9.1 torchvision==0.24.1 --index-url https://download.pytorch.org/whl/cu128
+.\.venv\Scripts\python.exe -m pip install triton-windows==3.5.0.post21
 .\.venv\Scripts\python.exe -m pip install -r requirements-falcon.txt
 .\.venv\Scripts\python.exe -c "import torch; print(torch.__version__, torch.version.cuda, torch.cuda.is_available(), torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU')"
 ```

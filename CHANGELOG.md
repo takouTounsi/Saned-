@@ -22,6 +22,7 @@ This file records repository changes. **Unreleased** entries describe changes th
 
 ### Changed
 
+- Pinned the Falcon model revision and added a GPU runtime preflight for the model's actual `AuxRequest` and Triton requirements. The launcher installs CUDA PyTorch 2.9.1 and matching Triton Windows 3.5 in its worker environment when the inherited host PyTorch is too old.
 - Pinned Falcon's Transformers dependency to 4.57.1 for compatibility with the host CUDA PyTorch 2.5.1, and made the launcher repair an already-installed incompatible Transformers 5 environment.
 - Made local Falcon on CUDA the automatic primary OCR engine. EasyOCR is selected automatically only when no NVIDIA GPU is detected; a GPU PC with CPU-only scanner PyTorch now reports a configuration error instead of silently using CPU OCR. The launcher installs Falcon Python packages when CUDA is ready, and reports an unavailable OCR engine before presenting the pack as ready.
 - Marked `demo/` as a legacy logic reference outside the active application and removed it from active startup instructions.
