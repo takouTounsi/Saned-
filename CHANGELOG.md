@@ -11,6 +11,7 @@ This file records repository changes. **Unreleased** entries describe changes th
 - Configured the three POC-04 demo services in one registry, with source-linked sample items, provisional multilingual copy, selectable catalogue cards, and planned synthetic document fixtures.
 
 - Added the POC-06.02/06.03 scripted dialogue manager: keyword and fact rules over the three configured services, one question per turn, manual-choice fallback, no eligibility statements, French/Derja/Arabizi reply copy (pending native-speaker review), config-driven `whereToGet` document explanations, and 19 routing fixtures. It is offline and rule-based, not a language model.
+- Added the POC-06.04 Assistant chat screen (bubbles, quick replies, example prompts, service suggestion card with a "Préparer ce dossier" action, manual-choice fallback, visible simulation badge, persisted conversation) and restyled the demo shell with a navy/gold look inspired by the Ministry site, using system fonts only.
 
 ### Changed
 
