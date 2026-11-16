@@ -1,6 +1,6 @@
 # Current status of Inclusa
 
-**Updated November 14, 2026.** This is an observed repository snapshot, not a product approval or a replacement for Issues and accepted ADRs.
+**Updated November 15, 2026.** This is an observed repository snapshot, not a product approval or a replacement for Issues and accepted ADRs.
 
 ## Project and decisions
 
@@ -16,20 +16,20 @@ Run the current demo and tests using [demo/README.md](demo/README.md). The progr
 
 ## In progress and missing from the runnable journey
 
-- [POC-06.01 (#49)](https://github.com/Medmas07/Inclusa/issues/49) is open and In progress. [PR #87](https://github.com/Medmas07/Inclusa/pull/87) adds nine exact French, Derja Arabic-script, and Arabizi routing fixtures. Its repository-validation checks passed, but the PR remains open and the fixtures are not yet wired to the assistant provider or UI.
+- [PR #87](https://github.com/Medmas07/Inclusa/pull/87) was merged into `main` and issue #49 is closed. The nine exact French, Derja Arabic-script, and Arabizi routing fixtures are available as regression material but are not yet wired to the assistant provider or UI. Issue #49's Project status still needs separate verification.
+- [POC-TECH-01 (#88)](https://github.com/Medmas07/Inclusa/issues/88) is ready for human review on `feat/88-componentized-frontend`: the React/TypeScript shell reuses the vanilla demo store, fixtures, registry, and JSDoc contracts, navigates seven stages, and exposes a typed mock/HTTP adapter boundary. The HTTP adapter explicitly rejects until backend issues #89/#90 are implemented; `?mode=http` displays that error for diagnosis. The Assistant, Documents, Booking, and Worker screens remain honest placeholders. Merge is pending.
 - The assistant still returns a placeholder reply; mock OCR returns no extraction. There is no guided form, document upload, computed checklist, simulated booking, worker view, or complete end-to-end journey. These belong to later authorized POC Issues.
-- Among the 18 top-level POC Issues (#7–#24), #7, #8, and #10 are closed and Done. #9 is in Backlog; the remaining top-level Issues are currently Blocked. Closing reviewed Issues has been observed to move their Project items to Done.
+- Among the 18 top-level POC Issues (#7–#24), #7, #8, and #10 are closed; the others remain open. Project status for each open issue was not rechecked in this snapshot. Closing reviewed Issues has been observed to move their Project items to Done.
 
 ## Local repository and verification
 
-- Remote: `https://github.com/Medmas07/Inclusa`. The local `main` and `origin/main` include merged POC-01, POC-02, and POC-04 work and were synchronized for this snapshot. Fetch before creating later branches to see subsequent remote changes.
-- This documentation update is separate from [PR #87](https://github.com/Medmas07/Inclusa/pull/87) and does not change its routing fixtures.
-- The latest local JavaScript run passed 11 tests; repository validation passed. These checks do not establish browser usability or official process accuracy.
+- Remote: `https://github.com/Medmas07/Inclusa`. `origin/main` includes merged POC-01, POC-02, POC-04, and PR #87 work. The local `main` branch has not yet been fast-forwarded to the fetched remote. The #88 branch starts at the fetched `origin/main`.
+- On the #88 branch, `npm run build` passed, `npm test` passed 3 frontend tests, `node --test demo/*.test.js` passed 11 existing tests, and `python scripts/validate_repo.py` passed after excluding installed package files from first-party Markdown validation. `npm run dev` started Vite and served HTTP 200 locally. Headless Chrome at 390 px and 1280 px found no horizontal page overflow; a keyboard Tab/Space path opened Services; Arabic labels rendered with `dir=rtl`; diagnostic HTTP mode showed a visible failure. Physical-device usability and official process accuracy remain unverified.
 
 ## Next checks
 
-1. Review and validate PR #87, including native-speaker review of the provisional prompts, before merge.
-2. Continue the authorized UI, dialogue, dossier, checklist, upload, appointment, and worker tickets in dependency order; keep the offline golden path deterministic.
+1. Review and validate the provisional wording from PR #87 with a native speaker before presenting it as user guidance.
+2. Complete and review #88, then continue the authorized UI, dialogue, dossier, checklist, upload, appointment, and worker tickets in dependency order; keep the offline golden path deterministic.
 3. Confirm source currency, document applicability, territorial ULPS, and any appointment process with MAS/ULPS mentors before presenting citizen guidance as verified.
 
 Never add secrets or real beneficiary documents to the repository.

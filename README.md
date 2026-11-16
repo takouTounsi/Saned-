@@ -14,6 +14,8 @@ The repository has a local, fictional [demo foundation](demo/README.md) under de
 
 From the repository root, run `python -m http.server 4173 --bind 127.0.0.1 --directory demo`, then open `http://127.0.0.1:4173/`. The prototype needs no secret, external API, package installation, or Internet connection. See the [demo guide](demo/README.md) for contracts and checks.
 
+The componentized Stage A frontend under development for [POC-TECH-01](https://github.com/Medmas07/Inclusa/issues/88) is in [frontend/](frontend/README.md). It reuses the demo registry and local store. Install its dependencies with `npm ci` in `frontend/`, then run `npm run dev`. The original `demo/` remains the dependency-free Stage 0 reference.
+
 ## Collaboration
 
 Contributors select focused Issues and assign themselves before starting. Each Issue should have a dedicated branch and a linked Pull Request. Human review and validation are required before completion. Substantive work does not happen directly on `main`. See [Contributing](CONTRIBUTING.md) and [Agent Instructions](AGENTS.md).

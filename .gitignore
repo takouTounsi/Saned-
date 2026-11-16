@@ -24,3 +24,7 @@ __pycache__/
 .pytest_cache/
 .coverage
 inclusa-llm-tests/
+
+# Frontend build and installed packages
+node_modules/
+frontend/dist/
