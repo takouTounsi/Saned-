@@ -25,6 +25,7 @@ A product vision or **Proposed** ADR is neither an approved requirement nor an a
 - Link the Pull Request to its Issue. Describe scope, validation, documentation, and security and privacy impacts.
 - Obtain human review. Never merge a Pull Request autonomously.
 - Do not commit or push without authorization in the current task.
+- Never add AI attribution to commits or Pull Requests. This applies to Claude Code, Codex, and every other assistant: no `Co-Authored-By:` trailer, no "Generated with" line, and no other signature naming an AI tool or model.
 
 ## Tests and documentation
 
