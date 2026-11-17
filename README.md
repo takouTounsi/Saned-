@@ -24,6 +24,8 @@ If the default model cache drive has less than 3 GB free, choose another drive e
 
 On Windows Python 3.12, the first Falcon GPU setup downloads a verified 2.86 GB CUDA PyTorch wheel into `%LOCALAPPDATA%\Inclusa\wheels` and resumes interrupted transfers. Its installation needs another 10 GB free on the worker drive while pip unpacks the wheel; the launcher checks this before starting the installation.
 
+The componentized Stage A frontend under development for [POC-TECH-01](https://github.com/Medmas07/Inclusa/issues/88) is in [frontend/](frontend/README.md). It reuses the demo registry and local store. Install its dependencies with `npm ci` in `frontend/`, then run `npm run dev`. The original `demo/` remains the dependency-free Stage 0 reference.
+
 ## Collaboration
 
 Contributors select focused Issues and assign themselves before starting. Each Issue should have a dedicated branch and a linked Pull Request. Human review and validation are required before completion. Substantive work does not happen directly on `main`. See [Contributing](CONTRIBUTING.md) and [Agent Instructions](AGENTS.md).
