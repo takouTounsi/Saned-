@@ -8,23 +8,24 @@ Social assistance procedures can be difficult to navigate, and incomplete applic
 
 ## Current stage
 
-The active local stack consists of the [application backend](backend/README.md) and [OCR scanner](ocr-scanner/README.md). Product requirements and architecture choices still need validation; no architecture decision has been accepted. Unknowns are marked `TBD`. See [Current Status](CURRENT_STATUS.md) for the latest repository and verification status.
+The active local stack is the Sned beneficiary interface in [frontend/](frontend/README.md) (React port of the team's Sned design, kept unchanged in [sned/](sned/README.md)), served by the [application backend](backend/README.md), with the [OCR scanner](ocr-scanner/README.md) and [Falcon GPU worker](falcon_gpu/README.md) for real OCR. Product requirements and architecture choices still need validation; no architecture decision has been accepted. Unknowns are marked `TBD`. See [Current Status](CURRENT_STATUS.md) for the latest repository and verification status.
 
 ## Start the local services
 
 From the repository root in PowerShell:
 
 ```powershell
-python scripts/start_local.py
+python scripts/start_local.py              # LOCAL: real OCR
+python scripts/start_local.py --mode mock  # DEMO: no OCR model, GPU or Internet service
 ```
 
-This creates local Python environments and installs missing requirements on first use, then starts Ollama if installed and not running, the OCR scanner on port 8000, and the application backend on port 8001. When an NVIDIA GPU is detected, it installs a compatible CUDA runtime in the [Falcon GPU worker](falcon_gpu/README.md) environment, starts that worker on port 8002, and connects the scanner to it. The host Python installation does not need PyTorch. Open `http://127.0.0.1:8000/` for the scanner interface or `http://127.0.0.1:8001/docs` for the application API. Press Ctrl+C to stop processes started by the command.
+This creates local Python environments and installs missing requirements on first use, then starts Ollama if installed and not running, the OCR scanner on port 8000, and the application backend on port 8001. When an NVIDIA GPU is detected, it installs a compatible CUDA runtime in the [Falcon GPU worker](falcon_gpu/README.md) environment, starts that worker on port 8002, and connects the scanner to it. The host Python installation does not need PyTorch. It also builds the frontend (Node.js 20.19+ is needed). Open `http://127.0.0.1:8001/` for the Sned app, `http://127.0.0.1:8001/demo` or `/demo60` for the scripted walkthroughs, and `http://127.0.0.1:8001/docs` for the API. In mock mode only the backend starts and OCR returns the demo ID card text. The legacy scanner interface stays at `http://127.0.0.1:8000/` in local mode. Press Ctrl+C to stop processes started by the command.
 
 If the default model cache drive has less than 3 GB free, choose another drive explicitly, for example `python scripts/start_local.py --hf-home F:\Inclusa-hf-cache` when `F:` is available. This changes only the cache used by that launcher process.
 
 On Windows Python 3.12, the first Falcon GPU setup downloads a verified 2.86 GB CUDA PyTorch wheel into `%LOCALAPPDATA%\Inclusa\wheels` and resumes interrupted transfers. Its installation needs another 10 GB free on the worker drive while pip unpacks the wheel; the launcher checks this before starting the installation.
 
-The componentized Stage A frontend under development for [POC-TECH-01](https://github.com/Medmas07/Inclusa/issues/88) is in [frontend/](frontend/README.md). It reuses the demo registry and local store. Install its dependencies with `npm ci` in `frontend/`, then run `npm run dev`. The original `demo/` remains the dependency-free Stage 0 reference.
+The [frontend/](frontend/README.md) README maps every Sned route to its React page and lists what is real and what is simulated. The earlier Stage A shell (POC-TECH-01) was replaced by this port; the original `demo/` remains a legacy logic reference.
 
 ## Collaboration
 

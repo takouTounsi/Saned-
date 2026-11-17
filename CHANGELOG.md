@@ -6,6 +6,10 @@ This file records repository changes. **Unreleased** entries describe changes th
 
 ### Added
 
+- Rebuilt the team's Sned frontend in React + TypeScript (`frontend/`, branch `feat/sned-react-migration`). There is one Vite page per Sned page, on the original routes, with the original CSS, texts, icons, voice guide, language switch and assets copied verbatim. `/demo` and `/demo60` are served unchanged. The original sources are kept in `sned/` as the reference. The earlier POC-TECH-01 shell screens and adapters were removed.
+- Ported the Sned server into `backend/sned/` (assistant rules, demo e-Houwiya login with an encrypted per-user record, appointment, tracking, document scanner) and served the React build from the backend. The scanner uses Inclusa's OCR pipeline with `INCLUSA_OCR_MODE=mock` (demo ID card text, no model or GPU) or `local` (Falcon or EasyOCR), reported by `GET /api/mode`.
+- Added `--mode mock|local` to `scripts/start_local.py`. The launcher now builds the frontend when it is missing or stale; mock mode starts only the backend. Added Sned backend tests, launcher tests and frontend behaviour tests.
+
 - Added `--hf-home` to the local launcher so a user can select a model cache on a drive with enough space in one command, without moving or deleting existing caches.
 - Added a persistent loopback Falcon GPU worker with a dedicated environment, with the scanner calling it over HTTP and the single-command launcher managing all three services.
 - Documented optional Falcon GPU setup for the scanner and added its Python requirements separately from the default EasyOCR installation.

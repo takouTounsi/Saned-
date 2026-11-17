@@ -27,3 +27,6 @@ inclusa-llm-tests/
 /frontend/node_modules/
 /frontend/dist/
 /pytest-cache-files-*/
+
+# Sned backend runtime data (encrypted user records, working scans, secret)
+/backend/data/

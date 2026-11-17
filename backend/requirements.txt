@@ -1,3 +1,10 @@
 fastapi
 uvicorn[standard]
 httpx
+# Sned API and document scanner (ported from the Sned app)
+python-multipart
+cryptography
+qrcode[pil]
+opencv-python-headless
+numpy
+rapidfuzz
