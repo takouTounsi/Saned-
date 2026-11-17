@@ -18,9 +18,11 @@ From the repository root in PowerShell:
 python scripts/start_local.py
 ```
 
-This creates local Python environments and installs missing requirements on first use, then starts Ollama if installed and not running, the OCR scanner on port 8000, and the application backend on port 8001. When host Python has CUDA PyTorch, it also starts the [Falcon GPU worker](falcon_gpu/README.md) on port 8002 and connects the scanner to it. Open `http://127.0.0.1:8000/` for the scanner interface or `http://127.0.0.1:8001/docs` for the application API. Press Ctrl+C to stop processes started by the command.
+This creates local Python environments and installs missing requirements on first use, then starts Ollama if installed and not running, the OCR scanner on port 8000, and the application backend on port 8001. When an NVIDIA GPU is detected, it installs a compatible CUDA runtime in the [Falcon GPU worker](falcon_gpu/README.md) environment, starts that worker on port 8002, and connects the scanner to it. The host Python installation does not need PyTorch. Open `http://127.0.0.1:8000/` for the scanner interface or `http://127.0.0.1:8001/docs` for the application API. Press Ctrl+C to stop processes started by the command.
 
 If the default model cache drive has less than 3 GB free, choose another drive explicitly, for example `python scripts/start_local.py --hf-home F:\Inclusa-hf-cache` when `F:` is available. This changes only the cache used by that launcher process.
+
+On Windows Python 3.12, the first Falcon GPU setup downloads a verified 2.86 GB CUDA PyTorch wheel into `%LOCALAPPDATA%\Inclusa\wheels` and resumes interrupted transfers. Its installation needs another 10 GB free on the worker drive while pip unpacks the wheel; the launcher checks this before starting the installation.
 
 ## Collaboration
 

@@ -7,7 +7,7 @@ This file records repository changes. **Unreleased** entries describe changes th
 ### Added
 
 - Added `--hf-home` to the local launcher so a user can select a model cache on a drive with enough space in one command, without moving or deleting existing caches.
-- Added a persistent loopback Falcon GPU worker that reuses host CUDA PyTorch through a dedicated environment, with the scanner calling it over HTTP and the single-command launcher managing all three services.
+- Added a persistent loopback Falcon GPU worker with a dedicated environment, with the scanner calling it over HTTP and the single-command launcher managing all three services.
 - Documented optional Falcon GPU setup for the scanner and added its Python requirements separately from the default EasyOCR installation.
 - Added `python scripts/start_local.py` as a single local launcher for the OCR scanner, application backend, and installed Ollama service. It creates missing virtual environments, installs missing requirements, checks readiness, and stops only processes it started.
 - Added a separate FastAPI application backend that forwards the documented OCR session, upload, analysis, review, discard, state, and image endpoints to the scanner API. Scanner-offline errors are explicit; integration tests use synthetic images.
@@ -22,8 +22,14 @@ This file records repository changes. **Unreleased** entries describe changes th
 
 ### Changed
 
+- Added `--ocr-engine auto|falcon|easyocr` to the local launcher so EasyOCR on CPU can be tested on a GPU computer without disabling the GPU; `auto` stays the default. The launcher now waits for the scanner's OCR initialization (`ocr_initialized` in its health response) instead of checking OCR readiness too early. EasyOCR loads with `verbose=False` because its download progress bar crashed on Windows cp1252 output.
+- Made the GPU scanner install use lightweight `requirements-http.txt`; EasyOCR and its CPU PyTorch remain available through the scanner's standard requirements for computers without an NVIDIA GPU. Removed obsolete global PyTorch/torchaudio and scanner CPU OCR packages from this development machine to make room for the worker runtime.
+- Pinned Falcon's worker to Transformers 5.23.0 for the model's `TokenizersBackend` tokenizer, checked the tokenizer during startup, and shortened the worker's TorchInductor and Triton cache paths on Windows. A synthetic GPU OCR request returned `HELLO 123`.
+- Made the large Python 3.12 Windows Falcon CUDA wheel download resumable across launcher runs, with size and official SHA-256 verification before installation; other Python versions use a longer pip timeout and retries. A real download had timed out near 2.0 GB of 2.9 GB.
+- Raised the Falcon installation disk preflight after a verified wheel downloaded successfully but pip exhausted C: while unpacking it. The launcher now reports the missing space before reinstalling and keeps the verified wheel for a later run.
+- Detect an NVIDIA GPU with `nvidia-smi` even when the launcher's Python has no PyTorch; install the compatible CUDA runtime before other Falcon packages so dependency resolution cannot select CPU PyTorch first. Declare the worker's web and image dependencies explicitly instead of relying on host Python.
 - Pinned the Falcon model revision and added a GPU runtime preflight for the model's actual `AuxRequest` and Triton requirements. The launcher installs CUDA PyTorch 2.9.1 and matching Triton Windows 3.5 in its worker environment when the inherited host PyTorch is too old.
-- Pinned Falcon's Transformers dependency to 4.57.1 for compatibility with the host CUDA PyTorch 2.5.1, and made the launcher repair an already-installed incompatible Transformers 5 environment.
+- Initially pinned Falcon's Transformers dependency to 4.57.1 after a host PyTorch 2.5 incompatibility; the worker now uses PyTorch 2.9.1 and Transformers 5.23.0 for the model tokenizer.
 - Made local Falcon on CUDA the automatic primary OCR engine. EasyOCR is selected automatically only when no NVIDIA GPU is detected; a GPU PC with CPU-only scanner PyTorch now reports a configuration error instead of silently using CPU OCR. The launcher installs Falcon Python packages when CUDA is ready, and reports an unavailable OCR engine before presenting the pack as ready.
 - Marked `demo/` as a legacy logic reference outside the active application and removed it from active startup instructions.
 - Kept the standalone OCR scanner available when its engine is missing, added health and bounded JPEG/PNG uploads, removed extracted text and field values from server logs, made review and rescan transitions safer, and clarified fictional completion copy. CLI/HTTP Falcon modes remain configurable; their external availability is not implied by local startup.

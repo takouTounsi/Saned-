@@ -1,4 +1,7 @@
-transformers==4.57.1
+fastapi
+uvicorn
+Pillow
+transformers==5.23.0
 accelerate
 einops
 triton-windows==3.5.0.post21; sys_platform == "win32"
