@@ -1,5 +1,9 @@
 # Inclusa
 
+**English** · [Français](README.fr.md)
+
+> **Source code available on request.** In this repository, source files (`.py`, `.ts`, `.tsx`, `.js`, `.html`, `.css`) keep their names and full history but their content is replaced by a one-line notice. Documentation, configuration and assets are complete.
+
 Inclusa is a professional project for the **Social Tech Challenge 2026 — Tunisia**, Challenge 2: “Digitalizing the submission of social assistance applications.” It aims to make administrative requirements easier to understand, help people prepare complete applications, and support interactions with social workers. The project is being developed in the context of discussions with the Ministry of Social Affairs (MAS), UNDP, and the World Bank.
 
 ## Problem and vision
@@ -26,6 +30,74 @@ If the default model cache drive has less than 3 GB free, choose another drive e
 On Windows Python 3.12, the first Falcon GPU setup downloads a verified 2.86 GB CUDA PyTorch wheel into `%LOCALAPPDATA%\Inclusa\wheels` and resumes interrupted transfers. Its installation needs another 10 GB free on the worker drive while pip unpacks the wheel; the launcher checks this before starting the installation.
 
 The [frontend/](frontend/README.md) README maps every Sned route to its React page and lists what is real and what is simulated. The earlier Stage A shell (POC-TECH-01) was replaced by this port; the original `demo/` remains a legacy logic reference.
+
+## Architecture explained simply
+
+Think of Inclusa (its interface is called **Sned / سند**, "support") as a patient counter clerk that is open all day on your phone:
+
+1. **You explain your need**, by tapping big pictures or by speaking (for example: "I'd like a monthly allowance for my family").
+2. **Sned asks one simple question at a time**: age, household, income, schooling, and so on. With your consent, it can also fetch your family's details from the civil registry, which is simulated in this demo.
+3. **Sned tells you which programmes may concern you and why.** This is guidance only: the competent social services always take the decision.
+4. **Sned lists the documents to prepare**, explains where and how to get each one, and lets you mark what is missing. Your answers are kept, so you can come back later.
+5. **You log in with your digital identity and photograph your documents.** The phone checks that the photo is sharp, straightens the card and reads the ID card fields. You check and correct what it read before anything is saved.
+6. **You book an appointment** with the social worker and receive an SMS with your ticket. You can follow your file's progress without travelling. Appointments and SMS are simulated in this demo.
+
+A voice guide reads every step aloud in Tunisian Arabic, French or English. The interface is built for people who are not used to digital tools. **Rules decide, AI helps read and explain, a human validates.**
+
+## Technical architecture
+
+```
+ Browser (phone or computer)                 Local server (loopback)                      Optional local AI
+ ┌────────────────────────────┐   HTTP/WS   ┌───────────────────────────────────────┐    ┌────────────────────────┐
+ │ React 19 + TypeScript +    │ ──────────► │ FastAPI backend (Python)              │    │ Falcon-OCR GPU worker  │
+ │ Vite, 7 Sned pages (RTL,   │             │  • rules engine: questions,           │ ─► │ (transformers, CUDA,   │
+ │ ar/fr/en, voice guide)     │ ◄────────── │    eligibility guidance, documents    │    │ /v1/chat/completions)  │
+ │ Web Speech API (read-aloud)│             │  • demo login, encrypted user record  │    ├────────────────────────┤
+ │ camera + sharpness check   │             │  • appointment / tracking (simulated) │    │ EasyOCR (CPU)          │
+ └────────────────────────────┘             │  • scanner sessions + WebSocket       │    ├────────────────────────┤
+                                            │  • image pipeline (OpenCV) + OCR      │    │ Ollama small LLM       │
+                                            └───────────────────────────────────────┘    │ (intent spike only)    │
+                                                                                         └────────────────────────┘
+```
+
+| Layer | What is used | Role |
+|---|---|---|
+| Frontend | React 19, TypeScript, Vite (one page per Sned screen), original Sned CSS | Beneficiary journey; Arabic RTL, French and English; read-aloud guide via the browser's speech synthesis. Voice *input* is a scripted demo |
+| Rules engine | Python (`backend/sned/knowledge.py`), hand-written from a functional document on Tunisian social protection programmes | Decides which question to ask next, gives eligibility *guidance* (eligible / to be checked / not eligible, with reasons) and builds the document checklist. Deterministic and auditable; no AI involved |
+| Session and identity | FastAPI, HMAC-signed HttpOnly cookie, PBKDF2-hashed PIN, Fernet (AES + HMAC) encrypted per-user records and scans | Demo e-Houwiya login; data stays on the local machine |
+| Document intelligence | OpenCV (resolution, Laplacian sharpness, brightness, glare; card contour detection and perspective correction), rapidfuzz (fuzzy title keywords), regex and layout heuristics for the Tunisian ID card | Quality check, card straightening, document check, field extraction. The user always confirms the fields |
+| OCR models | **Falcon-OCR** (TII vision-language OCR model, run locally on an NVIDIA GPU through a small FastAPI worker) or **EasyOCR** (CRAFT text detection and recognition network, CPU). A **mock** mode returns the demo ID card text | Reading text from photos. Chosen at start-up (`--mode local` or `--mode mock`) and never switched silently |
+| Language model | Optional small local LLM through **Ollama** (`qwen3:4b-instruct` tested). It only extracts `{intent, script, facts}`, validated against a strict allowlist | Experimental spike (POC-17) in the legacy `demo/`. **Not connected** to the Sned interface, which keeps its deterministic dialogue |
+| Retrieval (RAG) | **Not implemented** | Retrieving official rules is part of the product vision; whether RAG or small models are suitable is an open question (`TBD`) |
+
+Everything runs locally (loopback), with open-source components and synthetic data only, in line with the project principles: small, targeted AI; local or on-premise hosting; human decision-making; confidentiality.
+
+## What works today and what is planned
+
+**Works today (local PoC, synthetic data):**
+
+- Full Sned journey in the browser: home, voice demo, request types (first application, renewal, appeal), one question per screen, review and editing, eligibility guidance, document list with "where to get it", missing documents, ready-to-scan.
+- Demo digital-identity login with an encrypted local record.
+- Document scanner on phone (`/m`) and computer (`/scanner`): quality check, card straightening, field extraction, manual correction and validation. This runs end to end in **mock** mode.
+- Falcon-OCR on a local RTX GPU and EasyOCR on CPU each read a synthetic test image correctly.
+- Appointment booking, SMS screen and tracking timeline, all simulated.
+- `/demo` and `/demo60` scripted walkthroughs for presentations, fully offline.
+- One-command launcher with `local` and `mock` modes. Automated tests cover the backend, the launcher, the OCR services and the frontend.
+
+**Not verified yet or limited:**
+
+- Real OCR (Falcon or EasyOCR) through the new React interface has not been verified end to end: the test machine ran out of disk and memory.
+- OCR accuracy on realistic synthetic documents has not been measured.
+- Pairing a phone by QR code needs HTTPS, which the local launcher does not provide yet.
+- Arabic, Tunisian Arabic and French wording still needs native-speaker review.
+
+**Planned or envisaged (subject to validation by MAS/ULPS and the project decision-makers):**
+
+- Real integrations, each to be authorised: e-Houwiya, Madaniya, ULPS agenda, SMS gateway.
+- Real speech-to-text for Tunisian Arabic, replacing the scripted voice demo.
+- Evaluation of small local models for understanding requests (POC-17 benchmark) and possibly retrieval of official rules (RAG). Neither is decided.
+- Social worker interface, case management, auditability and role-based access.
+- Accessibility review, HTTPS deployment on-premise, and an OCR results and limitations report.
 
 ## Collaboration
 
